@@ -4,6 +4,8 @@
 #include <iostream>
 using namespace std;
 
+void displayArray(double user_array[], int actual_len);
+
 void displayChoicePrompt()
 {
   //prompt user to enter choice
@@ -67,6 +69,31 @@ double findMax(double user_array[], int actual_len)
     }
   }
   return max;
+}
+
+//option 4
+void selectionSort(double user_array[], int actual_len)
+{
+  int i = 0; //outer loop indicates the postion to fill next
+  //int j = 0; //inner loop to find the smallest value in the unsorted part
+  int min_Index = 0;//index of minimum value in the unsorted part
+  double min = 0;
+
+  for(i = 0; i < actual_len; i++)
+  {
+    min_Index = i;
+    int j = i + 1;
+    for(; j < actual_len; j++)
+    {
+      if(user_array[j] < user_array[min_Index])
+      {
+        min_Index = j;
+      }
+    }
+    min = user_array[min_Index];
+    user_array[min_Index] = user_array[i];
+    user_array[i] = min;
+  }
 }
 
 //option 5
@@ -141,6 +168,8 @@ int main()
 	break;
 
       case 4:
+        selectionSort(user_array, actual_len);
+        displayArray(user_array, actual_len);
 	break;
 
       case 5:
