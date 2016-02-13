@@ -49,6 +49,12 @@ void displayArray(double user_array[], int actual_len)
   cout << "\n";
 }
 
+//option 8
+void displayExitMsg()
+{
+  cout << "Exiting the program!\n" << "Thank you!\n";
+}
+
 int main()
 {
   //declaring variables
@@ -58,8 +64,6 @@ int main()
 
   //display the welcome message
   cout << "Welcome!\n";
-
-  //prompt user to enter choice
   do{
     displayChoicePrompt();
     cin >> choice;
@@ -100,6 +104,8 @@ int main()
 	break;
 
       case 8:
+        displayExitMsg();
+        choice = 9;
 	break;
     }
   }
