@@ -19,38 +19,42 @@ void displayChoicePrompt()
 }
 
 //option 1
-void feedArrayInput(int array_len)
+void feedArrayInput(double user_array[], int actual_len)
 {
   //feed the elements of the array
-  double user_array[array_len];
   int i = 0;
   cout << "Enter the elements of the array: ";
 
-  for(i = 0; i < array_len; i++)
+  if(actual_len == 0)
+  {
+    cout << "\n";
+  }
+
+  for(i = 0; i < actual_len; i++)
   {
     cin >> user_array[i];
   }
 
-/* TODO - debug code
-  for(i = 0; i < array_len; i++)
-  {
-    cout << user_array[i] << " | ";
-  }
-
-*/
 }
 
 //option 7
-void displayArray()
+void displayArray(double user_array[], int actual_len)
 {
-
+  int i = 0;
+  cout << "The elements of the array are: ";
+  for(i = 0; i < actual_len; i++)
+  {
+    cout << user_array[i] << " ";
+  }
+  cout << "\n";
 }
 
 int main()
 {
   //declaring variables
   int choice = 0; //variable that holds user choice input
-  int array_len = 0;
+  int actual_len = 0;
+  double user_array[100];
 
   //display the welcome message
   cout << "Welcome!\n";
@@ -67,12 +71,12 @@ int main()
       case 1:
 	//feed the length of the array
 	cout << "Enter the number of elements in the array: ";
-	cin >> array_len;
+	cin >> actual_len;
 
         //TODO - flush the cin buffer
 	//cin.clear();
 	//cin.ignore(INT_MAX);
-	feedArrayInput(array_len);
+	feedArrayInput(user_array, actual_len);
 	break;
 
       case 2:
@@ -91,6 +95,8 @@ int main()
 	break;
 
       case 7:
+        displayArray(user_array, actual_len);
+
 	break;
 
       case 8:
