@@ -37,6 +37,38 @@ void feedArrayInput(double user_array[], int actual_len)
 
 }
 
+//option 2
+double findMin(double user_array[], int actual_len)
+{
+  double min = user_array[0];
+
+  int i = 0;
+  for(i = 1; i < actual_len; i++)
+  {
+    if(user_array[i] < min)
+    {
+      min = user_array[i]; 
+    }
+  }
+  return min;
+}
+
+//option 3
+double findMax(double user_array[], int actual_len)
+{
+  double max = user_array[0];
+
+  int i = 0;
+  for(i = 1; i < actual_len; i++)
+  {
+    if(user_array[i] > max)
+    {
+      max = user_array[i]; 
+    }
+  }
+  return max;
+}
+
 //option 7
 void displayArray(double user_array[], int actual_len)
 {
@@ -61,6 +93,8 @@ int main()
   int choice = 0; //variable that holds user choice input
   int actual_len = 0;
   double user_array[100];
+  double max = 0;
+  double min = 0;
 
   //display the welcome message
   cout << "Welcome!\n";
@@ -84,9 +118,13 @@ int main()
 	break;
 
       case 2:
+        min = findMin(user_array, actual_len);
+        cout << "Minimum element in array: " << min << "\n";
 	break;
 
       case 3:
+	max = findMax(user_array, actual_len);
+        cout << "Maximum element in array: " << max << "\n";
 	break;
 
       case 4:
