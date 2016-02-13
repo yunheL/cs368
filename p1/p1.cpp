@@ -69,6 +69,19 @@ double findMax(double user_array[], int actual_len)
   return max;
 }
 
+//option 5
+double computeAve(double user_array[], int actual_len)
+{
+  double sum = user_array[0];
+  int i = 0;
+  for(i = 1; i < actual_len; i++)
+  {
+    sum = sum + user_array[i];
+  }
+  
+  return sum/(double)(actual_len);
+}
+
 //option 7
 void displayArray(double user_array[], int actual_len)
 {
@@ -95,7 +108,7 @@ int main()
   double user_array[100];
   double max = 0;
   double min = 0;
-
+  double ave = 0;
   //display the welcome message
   cout << "Welcome!\n";
   do{
@@ -131,6 +144,8 @@ int main()
 	break;
 
       case 5:
+	ave = computeAve(user_array, actual_len);
+        cout << "The average of the elements are: " << ave << "\n";
 	break;
 
       case 6:
