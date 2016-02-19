@@ -109,6 +109,18 @@ double computeAve(double user_array[], int actual_len)
   return sum/(double)(actual_len);
 }
 
+//option 6
+void randomArray(int numEle, double a, double b, double random_array[])
+{
+  //srand(1000);
+
+  int i = 0;
+  for(i = 0; i < numEle; i++)
+  {
+    random_array[i] = (b - a) * ((double)rand()/(double)RAND_MAX) + a;
+  }
+}
+
 //option 7
 void displayArray(double user_array[], int actual_len)
 {
@@ -116,7 +128,8 @@ void displayArray(double user_array[], int actual_len)
   cout << "The elements of the array are: ";
   for(i = 0; i < actual_len; i++)
   {
-    cout << user_array[i] << " ";
+    printf("%.3f ", user_array[i]);
+    //cout << user_array[i] << " ";
   }
   cout << "\n";
 }
@@ -133,9 +146,16 @@ int main()
   int choice = 0; //variable that holds user choice input
   int actual_len = 0;
   double user_array[100];
+  double random_array[100];
   double max = 0;
   double min = 0;
   double ave = 0;
+  int numEle = 5;
+  double a = 0;
+  double b = 10;
+
+  srand(1000);
+
   //display the welcome message
   cout << "Welcome!\n";
   do{
@@ -178,6 +198,17 @@ int main()
 	break;
 
       case 6:
+ 	cout << "Enter the number of elements in the array: ";
+	cin >> numEle;
+
+	cout << "Enter the lower range for the elements: ";
+	cin >> a;
+
+	cout << "Enter the upper range for the elements: ";
+	cin >> b;
+
+	randomArray(numEle, a, b, random_array);
+	displayArray(random_array, numEle);
 	break;
 
       case 7:
