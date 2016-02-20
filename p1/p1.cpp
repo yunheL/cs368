@@ -28,7 +28,7 @@
 //                     stackoverflow<http://stackoverflow.com/questions/
 //                     10776073/random-double-between-min-and-max>
 ////////////////////////////// 80 columns wide /////////////////////////////////
-
+//CFM: this is the correct file to submit.
 /*
  * This class is the only class for this program and includes the
  * implementation for all the functionalities.
