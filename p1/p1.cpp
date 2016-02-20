@@ -1,11 +1,52 @@
+///////////////////////////////////////////////////////////////////////////////
+////                   ALL STUDENTS COMPLETE THESE SECTIONS
+//// Title:            368 p1
+//// Files:            p1.cpp
+//// Semester:         Spring 2016
+////
+//// Author:           Yunhe Liu
+//// Email:            liu348@wisc.edu
+//// CS Login:         yunhe
+//// Lecturer's Name:  Deb Deppeler
+//// Lab Section:      N/A 
+////
+////////////////////// STUDENTS WHO GET HELP FROM OTHER THAN THEIR PARTNER //////
+////                   must fully acknowledge and credit those sources of help.
+////                   Instructors and TAs do not have to be credited here,
+////                   but tutors, roommates, relatives, strangers, etc do.
+////
+//// Persons:          Identify persons by name, relationship to you, and email.
+////                   Describe in detail the the ideas and help they provided.
+//
+////                   I went to Deb's lecture and it was a great time! :)
+//
+//// Online sources:   avoid web searches to solve your problems, but if you do
+////                   search, be sure to include Web URLs and description of 
+////                   of any information you find.
+//
+//                     piazza <https://piazza.com/class/ij1w7j04cwl101?cid=83>
+//                     stackoverflow<http://stackoverflow.com/questions/
+//                     10776073/random-double-between-min-and-max>
+////////////////////////////// 80 columns wide /////////////////////////////////
+
+/*
+ * This class is the only class for this program and includes the
+ * implementation for all the functionalities.
+ * @Author: Yunhe Liu
+ */
+
 #include <stdio.h>
 #include <stdlib.h>
 #include <limits.h>
 #include <iostream>
 using namespace std;
 
+//function declaration
 void displayArray(double user_array[], int actual_len);
 
+/*
+ * This funciton prompt user choices they have in a formatted manner.
+ */
 void displayChoicePrompt()
 {
   //prompt user to enter choice
@@ -17,9 +58,13 @@ void displayChoicePrompt()
   printf("6) Randomly generate array elements within a specific range\n");
   printf("7) Print the elements of the array\n");
   printf("8) Exit program\n");
-  printf("Enter your choice: "); //TODO - should I insert "\n" here?
+  printf("Enter your choice: "); 
 }
 
+/*
+ * This function fill array elements. 
+ * @ Param: Take in the array to write to and the number of elements to write
+ */
 //option 1
 void feedArrayInput(double user_array[], int actual_len)
 {
@@ -39,6 +84,10 @@ void feedArrayInput(double user_array[], int actual_len)
 
 }
 
+/*
+ * This function finds the minimum value in the array by linear search.
+ * @ Param: Take in the array and the number of elements in the array
+ */
 //option 2
 double findMin(double user_array[], int actual_len)
 {
@@ -55,6 +104,10 @@ double findMin(double user_array[], int actual_len)
   return min;
 }
 
+/*
+ * This function finds the maximum value in the array by linear search.
+ * @ Param: Take in the array and the number of elements in the array
+ */
 //option 3
 double findMax(double user_array[], int actual_len)
 {
@@ -71,6 +124,10 @@ double findMax(double user_array[], int actual_len)
   return max;
 }
 
+/*
+ * This function sorts the array by selection sort
+ * * @ Param: Take in the array and the number of elements in the array
+ */
 //option 4
 void selectionSort(double user_array[], int actual_len)
 {
@@ -96,6 +153,10 @@ void selectionSort(double user_array[], int actual_len)
   }
 }
 
+/*
+ * This function computers the average of the array
+ * @ Param: Take in the array and the number of elements in the array
+ */
 //option 5
 double computeAve(double user_array[], int actual_len)
 {
@@ -109,6 +170,12 @@ double computeAve(double user_array[], int actual_len)
   return sum/(double)(actual_len);
 }
 
+/*
+ * This function generates random numbers to fill in the array.
+ * @ Param: Take in the array and the number of elements in the array,
+ *          and the lower and upper bound of the elements and the
+ *          array to write to.
+ */
 //option 6
 void randomArray(int numEle, double a, double b, double random_array[])
 {
@@ -121,6 +188,10 @@ void randomArray(int numEle, double a, double b, double random_array[])
   }
 }
 
+/*
+ * This method display the array in a formatted manner
+ * @ Param: Take in the array and the number of elements in the array.
+ */
 //option 7
 void displayArray(double user_array[], int actual_len)
 {
@@ -134,6 +205,9 @@ void displayArray(double user_array[], int actual_len)
   cout << "\n";
 }
 
+/*
+ * This method displays exit message.
+ */
 //option 8
 void displayExitMsg()
 {
@@ -143,26 +217,26 @@ void displayExitMsg()
 int main()
 {
   //declaring variables
-  int choice = 0; //variable that holds user choice input
-  int actual_len = 0;
-  double user_array[100];
-  double random_array[100];
-  double max = 0;
-  double min = 0;
-  double ave = 0;
-  int numEle = 5;
-  double a = 0;
-  double b = 10;
+  int done = 0;             //boolean to see whether want to exit
+  int choice = 0;           //variable that holds user choice input
+  int actual_len = 0;       //length of the array
+  double user_array[100];   //array base address (size of array is 100)
+  double max = 0;           //max value in the array
+  double min = 0;           //min value in the array
+  double ave = 0;           //average of the array
+  double a = 0;             //lower bound for random generator 
+  double b = 10;            //upper bound for random generator
 
-  srand(1000);
+  srand(1000);              //random number generator with 1000 as seed
 
   //display the welcome message
   cout << "Welcome!\n";
   do{
     displayChoicePrompt();
+    //read in choice entered by user
     cin >> choice;
-    //printf("choice is: %d\n", choice); //TODO - remove debug code
 
+    //switch based on the choice entered
     switch(choice)
     {
       //feed array input
@@ -171,35 +245,44 @@ int main()
 	cout << "Enter the number of elements in the array: ";
 	cin >> actual_len;
 
-        //TODO - flush the cin buffer
+        //flush the cin buffer
 	//cin.clear();
 	//cin.ignore(INT_MAX);
 	feedArrayInput(user_array, actual_len);
 	break;
 
+      //call methoed to find the minimum value of the array
       case 2:
         min = findMin(user_array, actual_len);
-        cout << "Minimum element in array: " << min << "\n";
+        printf("Minimum element in array: %.3f ", min);
+        cout << "\n";
 	break;
 
+      //call method to find the maximum value of the array
       case 3:
 	max = findMax(user_array, actual_len);
-        cout << "Maximum element in array: " << max << "\n";
+        printf("Maximum element in array: %.3f ", max);
+        cout << "\n";
 	break;
 
+      //call methoed to selection sort the array
       case 4:
         selectionSort(user_array, actual_len);
         displayArray(user_array, actual_len);
 	break;
 
+      //call method to find the average of the array
       case 5:
 	ave = computeAve(user_array, actual_len);
-        cout << "The average of the elements are: " << ave << "\n";
+        printf("The average of the elements are: %.3f ", ave);
+        cout << "\n";
 	break;
 
+      //call method to generate the random array with upper bound b and
+      //lower bound a and with acutal_len elements
       case 6:
  	cout << "Enter the number of elements in the array: ";
-	cin >> numEle;
+	cin >> actual_len;
 
 	cout << "Enter the lower range for the elements: ";
 	cin >> a;
@@ -207,24 +290,34 @@ int main()
 	cout << "Enter the upper range for the elements: ";
 	cin >> b;
 
-	randomArray(numEle, a, b, random_array);
-	displayArray(random_array, numEle);
+	randomArray(actual_len, a, b, user_array);
+	displayArray(user_array, actual_len);
 	break;
 
+      //call method to print the array in a formatted 
       case 7:
         displayArray(user_array, actual_len);
 
 	break;
-
+      
+      //call method to display exit message and set the done boolean to true
       case 8:
         displayExitMsg();
-        choice = 9;
+        done = 1;
 	break;
     }
   }
   //repeated prompted with choice 1-8
-  while(choice < 9 && choice > 0);
+  while(choice < 9 && choice > 0 && done != 1);
+ 
+  //detec invalid input and terminate the program 
+  if(choice > 8 || choice < 1)
+  {
+    cout << "Invalid input, program terminate." << "\n";
+    return -1;
+  }
 
+  //return 0 when exit correctly
   return 0;
 }
 
