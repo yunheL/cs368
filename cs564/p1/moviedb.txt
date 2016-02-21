@@ -1,0 +1,110 @@
+CREATE DATABASE moviedb;
+
+\c moviedb
+
+create table movies(
+mid int,
+title varchar(20),
+primary key(mid)
+);
+
+create table actors(
+aid int,
+firstName varchar(20),
+lastName varchar(20),
+primary key(aid)
+);
+
+create table directors(
+did int,
+firstName varchar(20),
+lastName varchar(20),
+primary key(did)
+);
+
+create table reviews(
+title varchar(20),
+rating smallint CHECK (rating > -1 AND rating < 6),
+author varchar(20),
+content varchar(1000),
+rid int,
+mid int references movies,
+primary key(rid)
+);
+
+create table theaters(
+tid int,
+streetAddress varchar(40),
+city varchar(20),
+state varchar(2),
+zip int,
+primary key(tid)
+);
+
+create table showings(
+sid int,
+tid int references theaters,
+mid int references movies,
+showtime timestamp,
+primary key(sid)
+);
+
+create table ma(
+mid int references movies,
+aid int references actors,
+primary key(mid, aid)
+);
+
+create table md(
+mid int references movies,
+did int references directors,
+primary key(mid, did)
+);
+
+INSERT INTO movies(mid, title)
+VALUES
+(0, 'Deadpool'),
+(1, 'Kung Fu Panda 3');
+
+INSERT INTO directors(did, firstName, LastName)
+VALUES
+(0, 'Tim', 'Miller'),
+(1, 'Alessandro', 'Carloni');
+
+INSERT INTO actors(aid, firstName, LastName)
+VALUES
+(0, 'Ryan', 'Reynolds'),
+(1, 'Jack', 'Black');
+
+INSERT INTO reviews(title, rating, author, content, rid, mid)
+VALUES
+('Pool great movie', 5, 'Yunhe', 'Pool is great!', 0, 0),
+('Pool bad movie', 0, 'Steve', 'Pool is bad!', 1, 0),
+('Panda great movie', 5, 'Yunhe', 'Panda is great!', 2, 1),
+('Panda bad movie', 0, 'Xuyi', 'Panda is bad!', 3, 1);
+
+INSERT INTO theaters(tid, streetAddress, city, state, zip)
+VALUES
+(0, '430 North Midvale Boulevard', 'Madison', 'WI', 53705),
+(1, '6091 McKee Rd., Fitchburg', 'Madison', 'WI', 53719);
+
+INSERT INTO showings(sid, tid, mid, showtime)
+VALUES
+(0, 0, 0, '2016-2-21 11:15'),
+(1, 0, 0, '2016-2-21 23:15'),
+(2, 0, 1, '2016-2-21 11:15'),
+(3, 0, 1, '2016-2-21 23:15'),
+(4, 1, 0, '2016-2-21 11:15'),
+(5, 1, 0, '2016-2-21 23:15'),
+(6, 1, 1, '2016-2-21 11:15'),
+(7, 1, 1, '2016-2-21 23:15');
+
+INSERT INTO ma(mid, aid)
+VALUES
+(0,0),
+(1,1);
+
+INSERT INTO md(mid, did)
+VALUES
+(0,0),
+(1,1);

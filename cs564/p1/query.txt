@@ -1,0 +1,10 @@
+/* calculate average */
+
+/* what are all the movie title, showtimes showings at a particular theater */
+SELECT title, showtime, tid FROM showings, movies where showings.tid = 0 AND movies.mid = showings.mid;
+
+/* What are all the movies directed by a director */
+SELECT did, title FROM movies, md WHERE md.did = 0 AND movies.mid = md.mid;
+
+/* who direct a particular movie */
+SELECT firstName, lastName, title FROM movies, md, directors WHERE movies.mid = 0 AND md.did = directors.did AND movies.mid = md.mid;
