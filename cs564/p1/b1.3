@@ -1,0 +1,6 @@
+create database bcnfdb;
+\c bcnfdb
+create table r1(Store int, Type char(1), Size int, primary key(Store));
+create table r2(WeekDate date, IsHoliday boolean, primary key(WeekDate));
+create table r3(Store int references r1, Dept int, WeekDate date references r2, WeeklySales real, primary key(Store, Dept, WeekDate));
+create table r4(Store int references r1, WeekDate date references r2, Temperature real, FuelPrice real, CPI real, UnemploymentRate real, primary key(Store, WeekDate));
