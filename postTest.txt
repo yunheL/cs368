@@ -1,0 +1,78 @@
+==5401== Memcheck, a memory error detector
+==5401== Copyright (C) 2002-2012, and GNU GPL'd, by Julian Seward et al.
+==5401== Using Valgrind-3.8.1 and LibVEX; rerun with -h for copyright info
+==5401== Command: ./test
+==5401== 
+
+Test Student class functionality===
+default no-arg constructor
+default 1-arg constructor
+default 3-arg constructor
+default 3-arg constructor
+default 3-arg constructor
+st2_ID = 2
+st2_credit = 8
+st2_GPA = 4
+st2_ID = 2
+st2_credit = 10
+st2_GPA = 3.2
+1,0,02,10,3.2
+===Test SortedList CLass Functionality===
+list no-arg constructor
+insert id=2: 1
+insert id=2: 0
+insert id=4: 1
+insert id=4: 0
+insert id=3: 1
+insert id=3: 0
+remove id=4: 0x7feffff60; expected: 0x7feffff60
+remove id=2: 0x7feffff80; expected: 0x7feffff80
+remove id=2: 0; expected: 0
+insert id=2: 1
+insert id=2: 0
+insert id=4: 1
+2,10,3.2
+3,3,4
+4,4,4
+find2: 0x7feffff80; expected: 0x7feffff80
+find3: 0x7feffff70; expected: 0x7feffff70
+
+===Test stu cp assign, cp constr, de-constr===
+student copy constructor
+3,3,4
+student assignment
+4,4,4
+
+===Test list cp assign, cp constr, de-constr===
+list copy constructor
+list 1 print: 
+2,10,3.2
+3,3,4
+4,4,4
+construct list2
+list no-arg constructor
+list2 print before copy assignment
+list assignment
+list2 print after copy assignment
+2,10,3.2
+3,3,4
+4,4,4
+list deconstructor
+list deconstructor
+student destructor
+list deconstructor
+student destructor
+student destructor
+student destructor
+student destructor
+student destructor
+==5401== 
+==5401== HEAP SUMMARY:
+==5401==     in use at exit: 0 bytes in 0 blocks
+==5401==   total heap usage: 14 allocs, 14 frees, 224 bytes allocated
+==5401== 
+==5401== All heap blocks were freed -- no leaks are possible
+==5401== 
+==5401== For counts of detected and suppressed errors, rerun with: -v
+==5401== ERROR SUMMARY: 0 errors from 0 contexts (suppressed: 6 from 6)
+
