@@ -1,0 +1,50 @@
+
+Test Student class functionality===
+default no-arg constructor
+default 1-arg constructor
+default 3-arg constructor
+default 3-arg constructor
+default 3-arg constructor
+st2_ID = 2
+st2_credit = 8
+st2_GPA = 4
+st2_ID = 2
+st2_credit = 10
+st2_GPA = 3.2
+1,0,02,10,3.2
+===Test SortedList CLass Functionality===
+list no-arg constructor
+insert id=2: 1
+insert id=2: 0
+insert id=4: 1
+insert id=4: 0
+insert id=3: 1
+insert id=3: 0
+remove id=4: 0x7feffff60; expected: 0x7feffff60
+remove id=2: 0x7feffff80; expected: 0x7feffff80
+remove id=2: 0; expected: 0
+insert id=2: 1
+insert id=2: 0
+insert id=4: 1
+2,10,3.2
+3,3,4
+4,4,4
+find2: 0x7feffff80; expected: 0
+find3: 0x7feffff70; expected: 0x7feffff70
+
+===Test stu cp assign, cp constr, de-constr===
+3,3,4
+4,4,4
+
+===Test list cp assign, cp constr, de-constr===
+list 1 print: 
+2,10,3.2
+3,3,4
+4,4,4
+construct list2
+list no-arg constructor
+list2 print before copy assignment
+list2 print after copy assignment
+2,10,3.2
+3,3,4
+4,4,4
