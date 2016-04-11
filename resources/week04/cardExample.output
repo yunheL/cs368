@@ -1,0 +1,35 @@
+Script started on Mon 15 Feb 2016 10:45:49 AM CST
+adelie-03[/p/course/cs368-deppeler/public/html/CPP/resources/week04]% make cardExample
+make[2]: Entering directory `/afs/cs.wisc.edu/p/course/cs368-deppeler/public/html/CPP/resources/week04'
+/s/gcc-5.1/bin/g++ -Wall  -o cardExample cardExample.cpp 
+[01m[KcardExample.cpp:[m[K In function ‘[01m[Kint main()[m[K’:
+[01m[KcardExample.cpp:132:35:[m[K [01;35m[Kwarning: [m[K‘[01m[KcardPtr[m[K’ may be used uninitialized in this function [-Wmaybe-uninitialized]
+     cout << "cardPtr=" << cardPtr ;
+[01;32m[K                                   ^[m[K
+./cardExample
+card1.suit is: 2
+card1.rank is: 5
+card1 is: 5H
+card2.suit is: 1
+card2.rank is: 11
+card2 is: JD
+card3.suit is: 1
+card3.rank is: 0
+card3 is: 0D
+
+Printing 2-d array deck: 
+AC, 2C, 3C, 4C, 5C, 6C, 7C, 8C, 9C, 10C, JC, QC, KC, 
+AD, 2D, 3D, 4D, 5D, 6D, 7D, 8D, 9D, 10D, JD, QD, KD, 
+AH, 2H, 3H, 4H, 5H, 6H, 7H, 8H, 9H, 10H, JH, QH, KH, 
+AS, 2S, 3S, 4S, 5S, 6S, 7S, 8S, 9S, 10S, JS, QS, KS, 
+
+Printing vector deck: 
+AC, 2C, 3C, 4C, 5C, 6C, 7C, 8C, 9C, 10C, JC, QC, KC, AD, 2D, 3D, 4D, 5D, 6D, 7D, 8D, 9D, 10D, JD, QD, KD, AH, 2H, 3H, 4H, 5H, 6H, 7H, 8H, 9H, 10H, JH, QH, KH, AS, 2S, 3S, 4S, 5S, 6S, 7S, 8S, 9S, 10S, JS, QS, KS, 
+results of arraysAreEqual(a,b,n) = true
+results of arraysAreEqual(a,c,n) = false
+cardPtr=0x603454 -- after assigned NULL cardPtr = 0
+make[2]: Leaving directory `/afs/cs.wisc.edu/p/course/cs368-deppeler/public/html/CPP/resources/week04'
+adelie-03[/p/course/cs368-deppeler/public/html/CPP/resources/week04]% exit
+exit
+
+Script done on Mon 15 Feb 2016 10:45:58 AM CST

@@ -1,0 +1,36 @@
+Script started on Mon 15 Feb 2016 10:44:14 AM CST
+adelie-03[/p/course/cs368-deppeler/public/html/CPP/resources/week04]% make vector
+make[2]: Entering directory `/afs/cs.wisc.edu/p/course/cs368-deppeler/public/html/CPP/resources/week04'
+/s/gcc-5.1/bin/g++ -Wall  -o vector_demo vector_demo.cpp
+[01m[Kvector_demo.cpp:[m[K In function ‘[01m[Kvoid print(std::vector<int>)[m[K’:
+[01m[Kvector_demo.cpp:10:22:[m[K [01;35m[Kwarning: [m[Kcomparison between signed and unsigned integer expressions [-Wsign-compare]
+     for (int i=0 ; i < param_v.size(); i++ )
+[01;32m[K                      ^[m[K
+./vector_demo
+print(v)
+vector param_v.size()=3
+vector param_v.max_size()=4611686018427387903
+vector param_v.capacity()=3
+vector param_v.empty()=0
+vector param_v.at(0)=3
+vector param_v.at(1)=4
+vector param_v.at(2)=5
+param_v.front() = 3
+param_v.back()  = 5
+change(v)
+print(v) after change(v)
+vector param_v.size()=4
+vector param_v.max_size()=4611686018427387903
+vector param_v.capacity()=4
+vector param_v.empty()=0
+vector param_v.at(0)=3
+vector param_v.at(1)=4
+vector param_v.at(2)=5
+vector param_v.at(3)=11
+param_v.front() = 3
+param_v.back()  = 11
+make[2]: Leaving directory `/afs/cs.wisc.edu/p/course/cs368-deppeler/public/html/CPP/resources/week04'
+adelie-03[/p/course/cs368-deppeler/public/html/CPP/resources/week04]% exit
+exit
+
+Script done on Mon 15 Feb 2016 10:44:25 AM CST

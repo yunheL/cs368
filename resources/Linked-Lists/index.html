@@ -1,0 +1,352 @@
+<html> <head> <title>Linked Lists</title>
+<link rel="stylesheet" type="text/css" href="./notes.css">
+</head>
+<body>
+<a name=top>
+<h1>Linked Lists</h1></a>
+
+<hr>
+<h2>Contents</h2>
+<ul>
+  <li> <a href="#ll">Intro to Linked Lists</a>
+  <!--<ul>
+    <li> <a href="#youtry1">Test Yourself #1</a></li>
+  </ul>-->
+  </li>
+  <li> <a href="#ops">Linked List Operations</a>
+  <ul>
+    <li> <a href="#addBegin">Adding to the beginning of a list</a></li>
+    <li> <a href="#addMiddle">Adding after a given node in a list</a></li>
+    <li> <a href="#removeNode">Removing a node</a></li>
+    <li> <a href="#addEnd">Adding to the end of a list</a></li>
+  </ul></li>
+</ul>
+<hr>
+
+
+
+
+<a name="ll">
+<h2>Intro to Linked Lists</h2>
+</a>
+<p>
+Here's a conceptual picture of a linked list containing N items,
+pointed to by a variable named  <span class="Java">head</span>:</p>
+<p>
+<pre>
+      +--+     +-----+--+     +-----+--+     +-----+--+              +-----+-+
+head: | -|---> |item1| -|---> |item2| -|---> |item3| -|---> ... ---> |itemN|\|
+      +--+     +-----+--+     +-----+--+     +-----+--+              +-----+-+
+</pre>
+</p>
+<p>
+Note that a linked list consists of one or more <span class="term">nodes</span>.
+Each node contains some data (in this example, item 1, item 2,
+etc.) and a pointer (note: usually the data is technically a pointer as well).
+For each node other than the last one, the pointer points to the next
+node in the list.
+For the last node, the pointer is null (indicated in the example using
+a diagonal line).
+
+To implement linked lists in C++, we will define a <span class="Java">ListNode</span>
+struct, to be used to represent the individual nodes of the list.</p>
+
+<a name="listnode"></a>
+<dir><pre>
+struct ListNode {
+    void *data;
+    Listnode *next;
+};
+</pre></dir>
+<p>Note that the <span class="Java">void *</span> type for the <span class="Java">data</span> field allows
+<span class="Java">data</span> to point to any type (for this reason the <span class="term">void pointer</span>
+is also known as a <span class="term">generic pointer</span>).
+In order to dereference <span class="Java">data</span>, a cast must be done to the actual type of the object 
+<span class="Java">data</span> is pointing at, e.g.,
+<span class="Java">int *dataPtr = static_cast&lt;int*&gt;(node.data);</span> casts the void pointer to an <span class="Java">int</span> pointer which can
+then be dereferenced as usual using <span class="Java">*</span>
+
+Note also that the <span class="Java">next</span> field of a <span class="Java">ListNode</span> is itself of type
+<span class="Java">ListNode</span>.
+</p>
+<p>
+To understand this better, consider writing code to create a linked
+list of <span class="Java">string</span>s with two nodes, containing <span class="Java">"ant"</span> and <span class="Java">"bat"</span>, respectively, pointed
+to by a variable named <span class="Java">head</span> (the pointer to the first node in a linked list is often called a
+<span class="term">head pointer</span>).
+First we need to declare variable <span class="Java">head</span> and
+make <span class="Java">head</span> point to the first node of the list.
+We'll use <span class="Java">new</span> to
+allocate space for that node.
+We want its <span class="Java">data</span> field to contain <span class="Java">"ant"</span> and we'll
+set the <span class="Java">next</span> field to <span class="Java">NULL</span>):</p>
+<p>Here's the code together with a picture showing what we have so far:</p>
+<p>
+<pre>
+ListNode *head = new ListNode;
+head->data = "ant";
+head->next = NULL;
+
+      +--+     +-----+-+
+head: | -|---> |"ant"|\|
+      +--+     +-----+-+
+</pre>
+</p>
+<p>
+To add the second node to the end of the list we need to create the
+new node (with <span class="Java">"bat"</span> in its <span class="Java">data</span> field and null in its
+<span class="Java">next</span> field) and we need to set the <span class="Java">next</span> field of
+the first node to point to the new one:</p>
+<p>
+<pre>
+ListNode *tmp = new ListNode;
+tmp->data = "bat";
+tmp->next = NULL;
+head->next = tmp;
+
+      +--+     +-----+--+     +-----+-+
+head: | -|---> |"ant"| -|---> |"bat"|\|
+      +--+     +-----+--+     +-----+-+
+</pre>
+</p>
+
+<!--
+<hr>
+<a name="youtry1"><p class="testYourself">TEST YOURSELF #1</p></a>
+<p>
+Assume that the list shown above (with nodes <span class="Java">"ant" </span>and <span class="Java">"bat"</span>) has been
+created.</p>
+<p>
+<span class="minorHeading">Question 1:</span> Write code to change the contents of the second node's <span class="Java">data</span> field from
+<span class="Java">"bat"</span> to <span class="Java">"cat"</span>.</p>
+<p>
+<span class="minorHeading">Question 2:</span> Write code to insert a new node with <span class="Java">"rat"</span> in its <span class="Java">data</span> field
+<em>between</em> the two existing nodes.</p>
+<p>
+<a href="answers.html#ans1">solution</a></p>
+<hr>
+-->
+<a name="ops">
+<h2>Linked List Operations</h2></a>
+<p>
+Let's consider some basic operations on linked lists:</p>
+<ul>
+  <li> Adding a node to the list.</li>
+  <li> Removing a given node from the list.</li>
+</ul>
+
+<p>When we add a node to the list, how we do it may depend on where the node is being added.  We will consider adding a node:</p>
+<ul>
+  <li>to the beginning of a list,</li>
+  <li>after a given node in the list, and</li>
+  <li>to the end of a list</li>
+</ul>
+
+<a name="addBegin"></a>
+<h3>Adding to the beginning of a list</h3>
+<p>Assume that <span class="Java">head</span> is a pointer to the first node in the list and that <span class="Java">newdat</span> is
+This means that the new node will become the new first node in the list and that what had been the first node will now need to
+be pointer to by the new node's <span class="Java">next</span> field.  Here's the code:</p>
+<p><pre>
+ListNode *tmp = new ListNode;
+tmp->data = newdat;
+tmp->next = head;     // tmp's next will point to what had been the first node
+head = tmp;           // update head pointer
+</pre></p>
+<p>Note that this works even if the list is initially empty: if the list is empty, then<span class="Java">head</span>
+is null, so the <span class="Java">next</span> field of the new node will be set to null.
+</p>
+
+
+<a name="addMiddle"</a>
+<h3>Adding after a given node in a list</h3>
+<p>
+Assume that we are given:</p>
+<ol>
+  <li> <span class="Java">n</span>, (a pointer to) a node in a list (i.e., <span class="Java">n</span> is
+       a <span class="Java">Listnode</span>), and</li>
+  <li> <span class="Java">newdat</span>, the data to be stored in a new node</li>
+</ol>
+<p>
+and that the goal is to add a new node containing <span class="Java">newdat</span> immediately
+after <span class="Java">n</span>.  To do this we must perform the following steps:</p>
+<dir>Step 1: create the new node using the given data<br><br>
+
+Step 2: "link it in":
+  <ol type="a">
+    <li>make the new node's <span class="Java">next</span> field point to whatever
+     <span class="Java">n</span>'s <span class="Java">next</span> field was pointing to</li>
+  <li>make <span class="Java">n</span>'s <span class="Java">next</span> field point to the new node.</li>
+  </ol>
+</dir>
+<p>
+Here's the conceptual picture (note: in the images below, we really should use <span class="Java">head</span> instead of <span class="Java">l</span>):</p>
+<p>
+<img src="addnode.gif"></p>
+<p>(note: n.next in step 2(b) should be n->next)
+<p>
+And here's the code:<a name="addNodeCode"></a>
+<dir><pre>
+ListNode *tmp = new Listnode;
+tmp->data = newdat;                       // Step 1
+tmp->next = n->next;                      // Step 2(a)
+n->next = tmp;                            // Step 2(b)
+</pre></dir>
+<p>
+Note that it is vital to first copy the value of <span class="Java">n</span>'s
+<span class="Java">next</span> field
+into <span class="Java">tmp</span>'s <span class="Java">next</span> field (step 2(a)) before setting
+<span class="Java">n</span>'s <span class="Java">next</span> field to point to the new node (step 2(b)).
+If we set <span class="Java">n</span>'s <span class="Java">next</span> field first, we would lose our
+only pointer to the rest of the list after node <span class="Java">n</span>!</p>
+<p>
+Also note that, in order to follow the steps shown in the picture
+above, we needed to use variable <span class="Java">tmp</span> to create the new node
+(in the picture, step 1 shows the new node just "floating" there, but
+that isn't possible -- we need to have some variable point to it so
+that we can set its <span class="Java">next</span> field and so that we can set
+<span class="Java">n</span>'s <span class="Java">next</span> field to point to it).
+</p>
+
+
+  
+<a name="removeNode">
+<h3>Removing a node</h3></a>
+<p>
+To remove a given node <span class="Java">n</span> from a linked list, we need to
+change the <span class="Java">next</span> field of the node that comes immediately
+<em>before</em> <span class="Java">n</span> in the list to point to whatever <span class="Java">n</span>'s
+<span class="Java">next</span> field was pointing to.
+
+Here's the conceptual picture (note: as before, in the images below, we really should use <span class="Java">head</span> instead of <span class="Java">l</span>):</p>
+<p>
+<img src="removenode.gif"></p>
+<p>
+Note that we will also need to delete the node <span class="Java">n</span> is pointing to (to avoid a memory leak).
+
+It should be clear that in order to implement the <span class="adt">remove</span> operation, we
+first need to have a pointer to the node <em>before</em> node <span class="Java">n</span>
+(because that node's <span class="Java">next</span> field has to be changed).
+The only way to get to that node is to start at the beginning of the
+list.
+We want to keep moving along the list as long as the current node's
+<span class="Java">next</span> field is <em>not</em> pointing to node <span class="Java">n</span>.
+Here's the appropriate code:</p>
+<dir><pre>
+ListNode *tmp = head;
+while (tmp->next != n) {  // find the node before n
+    tmp = tmp->next;    
+}</pre></dir>
+<p>
+Note that this kind of code (moving along a list until some condition holds)
+is very common.
+For example, similar code would be used to implement a <span class="adt">lookup</span>
+operation on a linked list (an operation that determines whether there
+is a node in the list that contains a given piece of data).</p>
+<p>
+Note also that there is one case when the code given above will not
+work.
+When <span class="Java">n</span> is the very first node in the list, the picture is
+like this:</p>
+<p>
+<img src="firstnode.gif"></p>
+<p>
+In this case, the test <span class="Java">(tmp->next != n)</span> will always be false and
+eventually we will "fall off the end" of the list (i.e., <span class="Java">tmp</span> will
+become null and we will get a runtime error when we try to dereference
+a null pointer).
+We will take care of that case in a minute;
+first, assuming that <span class="Java">n</span> is not the first node in the list, here's the
+code that removes <span class="Java">n</span> from the list:</p>
+<dir>
+<pre>
+ListNode *tmp = head;
+while (tmp->next != n) {  // find the node before n
+    tmp = tmp->next;       
+}
+tmp->next = n->next;      // remove n from the linked list
+delete n;                 // free the memory pointed to by n
+</pre>
+</dir>
+
+<p>
+How can we test whether <span class="Java">n</span> is the first node in the list and
+what should we do in that case?
+If <span class="Java">n</span> is the first node, then <span class="Java">head</span> will be pointing to it,
+so we can test whether <span class="Java">head == n</span>.
+The following before and after pictures illustrate removing node <span class="Java">n</span>
+when it is the first node in the list:</p>
+<p>
+<img src="removeFirst.gif">
+<p><a name="removeNodeCode">
+Here's the complete code for removing node <span class="Java">n</span> from a linked list,
+including the special case when <span class="Java">n</span> is the first node in the list:</a>
+<dir><pre>
+if (head == n) {
+  // special case: n is the first node in the list
+    head = n->next;
+} else {
+  // general case: find the node before n, then "unlink" n
+    ListNode *tmp = head;
+    while (tmp->next != n) {  // find the node before n
+        tmp = tmp->next;       
+    }
+    tmp->next = n->next;      // remove n from the linked list
+}
+delete n;                     // free the memory pointed to by n
+</pre></dir>
+
+
+<a name="addEnd"></a>
+<h3>Adding to the end of a list</h3>
+<p>Finally, we look at how best to handle adding a new node at the end
+of the list.
+A straightforward approach would be to traverse the list, looking for
+the last node (i.e., use a variable <span class="Java">tmp</span> as was done above
+in the code that looked for the node before node <span class="Java">n</span>).
+Once the last node is found, the new node can be inserted immediately after it.</p>
+
+<p>
+An alternative (which does not require a traversal of the entire linked list)
+is to keep track of a <span class="term">tail pointer</span> (i.e., a pointer to
+the last node in the list) in addition to a head pointer.  Note that this will require
+that operations that modify a linked list need to make sure that the tail pointer
+is kept up to date so it always points to the last node in the list.
+There is more opportunity for error (since there are potentially several operations/pieces of code
+that will need to keep the tail pointer up to data), but the
+use of the tail pointer will mean that adding to the end of a list can be done very quickly, regardless
+of the number of nodes in the list (which will be
+important for applications that frequently add to the end of a list).
+</p>
+<p>
+Here's a picture of the "ant, bat, cat" list, when
+the implementation includes a <span class="Java">tail</span> pointer: </p>
+<p>
+<pre>
+      +--+     +-----+--+     +-----+--+     +-----+-+
+head: | -|---> |"ant"| -|---> |"bat"| -|---> |"cat"|\|
+      +--+     +-----+--+     +-----+--+     +-----+-+    
+                                                ^
+      +--+                                      |
+tail: | -| -------------------------------------+
+      +--+
+</pre>
+</p>
+<!--
+<p>
+<img src="lastnode.gif"></p>
+<hr>
+<a name="youtry2">
+<p class="testYourself">TEST YOURSELF #2</p>
+</a>
+<p>
+Write the code to add "dog" to the end of the linked list shown above.
+</p>
+<p>
+<a href="answers.html#ans2">solution</a></p>
+<hr>
+-->
+
+
+</body>
+</html>

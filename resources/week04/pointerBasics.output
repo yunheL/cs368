@@ -1,0 +1,11 @@
+Script started on Mon 15 Feb 2016 10:53:30 AM CST
+adelie-03[/p/course/cs368-deppeler/public/html/CPP/resources/week04]% make pointerBasics
+make[2]: Entering directory `/afs/cs.wisc.edu/p/course/cs368-deppeler/public/html/CPP/resources/week04'
+/s/gcc-5.1/bin/g++ -Wall  -o pointerBasics pointerBasics.cpp
+./pointerBasics
+w=3 x=1 y=1 z=1 *p=3 *q=1.500000 *s=2 *t=2 *u=3 v=5 **dblP=3
+make[2]: Leaving directory `/afs/cs.wisc.edu/p/course/cs368-deppeler/public/html/CPP/resources/week04'
+adelie-03[/p/course/cs368-deppeler/public/html/CPP/resources/week04]% ec[Kxit
+exit
+
+Script done on Mon 15 Feb 2016 10:53:43 AM CST

@@ -1,0 +1,13 @@
+body { font-family: Helvetica, Arial, sans-serif; background-color: white; text-color: black; font-size: 10pt }
+h1 h2 h3 { font-family: Arial }
+h1 { font-size: 140%; font-family: sans-serif; color: black}
+h2 { font-size: 130%; color: rgb(0%, 0%, 50%) }
+h3 { font-size: 110%; font-style:italic; color: rgb(0%, 0%, 75%) }
+h4 { font-size: 105%; font-styel: bold }
+em { font-weight: bold }
+.button   { font-family: Arial; font-style: bold; color: blue }
+.note     { font-style: italic; color: green }
+.subtitle { font-family: sans-serif; text-align: center; font-size: 120% }
+.attop    { vertical-align: top; text-align: justify }
+.prompt   { font-weight: bold; color: blue }
+.response { font-weight: bold; color: black }

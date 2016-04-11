@@ -1,0 +1,22 @@
+Script started on Mon 29 Feb 2016 09:09:52 AM CST
+macaroni-05[/p/course/cs368-deppeler/public/html/CPP/resources/week06]% a.out
+TestWidget_main_start
+Widget w;    w.getId()  = 0
+           w.getName()  = Widget_0
+w.setId(3);  w.getId()  = 3
+
+Widget *x;    x = 0x4036c9
+
+x = new Widget; (*x).getId() = 1                  x->getId() = 1
+x->setId(13);   (*x).getId() = 13                  x->getId() = 13
+(*x).setId(11); (*x).getId() = 11                  x->getId() = 11
+TestWidget_main_end
+TestWidgetList_start
+[ ]
+[ ID:2 name:Widget_2, ]
+TestWidgetList_end
+3
+macaroni-05[/p/course/cs368-deppeler/public/html/CPP/resources/week06]% exit
+exit
+
+Script done on Mon 29 Feb 2016 09:09:58 AM CST

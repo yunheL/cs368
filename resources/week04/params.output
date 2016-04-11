@@ -1,0 +1,11 @@
+Script started on Mon 15 Feb 2016 10:36:39 AM CST
+adelie-03[/p/course/cs368-deppeler/public/html/CPP/resources/week04]% make pram[K[K[Karams
+/s/gcc-5.1/bin/g++ -Wall  -o params_demo params_demo.cpp
+./params_demo
+x=3 y=4
+x=4 y=3
+x=4 y=3
+adelie-03[/p/course/cs368-deppeler/public/html/CPP/resources/week04]% exit
+exit
+
+Script done on Mon 15 Feb 2016 10:36:52 AM CST

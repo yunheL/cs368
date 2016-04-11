@@ -1,0 +1,87 @@
+<html>
+
+<head>
+<meta http-equiv="Content-Language" content="en-us">
+<meta name="GENERATOR" content="Microsoft FrontPage 12.0">
+<meta name="ProgId" content="FrontPage.Editor.Document">
+<meta http-equiv="Content-Type" content="text/html; charset=windows-1252">
+<LINK rel="stylesheet" type="text/css" href="./example.css">
+<title>Simple C++ Program</title>
+</head>
+
+<body>
+<h1>Simple C++ Program</h1>
+<hr>
+<h2>C++ source code:</h2>
+
+<dir><pre>
+
+/*
+ * A very simple C++ program demonstrating simple console I/O.
+ */
+ 
+#include &lt;iostream&gt;
+
+using namespace std;
+
+int main( ) {
+
+    cout &lt;&lt; "Please enter a number and a letter: " &lt;&lt; flush;
+
+    int a;
+    char b;
+
+    cin &gt;&gt; a &gt;&gt; b;
+    cout &lt;&lt; endl;
+
+    cout &lt;&lt; "The number you entered was: " &lt;&lt; a &lt;&lt; endl;
+    cout &lt;&lt; "The letter you entered was: " &lt;&lt; b &lt;&lt; endl;
+
+    return 0;  // 0 to indicate normal termination of program
+
+}
+
+</pre></dir>
+<hr>
+<h2>To compile:</h2>
+<p>&nbsp;</p>
+
+<pre>
+g++ -o simpleProgram simpleProgram.cpp
+</pre>
+<p>&nbsp;</p>
+<hr>
+<h2>To run:</h2>
+<p>&nbsp;</p>
+<pre> ./simpleProgram input
+</pre>
+<p>&nbsp;</p>
+<hr>
+<h2>A Simple Makefile</h2>
+<p>&nbsp;</p>
+<pre>
+make:
+	g++ simpleProgram.cpp -o simpleProgram
+	simpleProgram input
+</pre>
+<p>&nbsp;</p>
+<hr>
+<h3>Try running the program with the following user inputs:</h3>
+<dir><pre>87b
+	
+-12h	
+
+9 b	
+
+43.2a	
+
+9    b    abc
+
+y76</pre></dir>
+<ul>
+<li>What do you think will happen?</li>
+<li>What would happen in the equivalent Java program?</li>
+<li>What actually happens? </li>
+</ul>
+
+</body></html>

@@ -1,0 +1,226 @@
+<html>
+
+<head>
+<meta http-equiv="Content-Language" content="en-us">
+<meta name="GENERATOR" content="Microsoft FrontPage 12.0">
+<meta name="ProgId" content="FrontPage.Editor.Document">
+<meta http-equiv="Content-Type" content="text/html; charset=windows-1252">
+<LINK rel="stylesheet" type="text/css" href="../example.css">
+<title>IntList Example</title>
+</head>
+
+<body>
+<h1>IntList Example</h1>
+<p>Source files (for downloading):</p>
+<ul>
+<li><a href="IntList.h">IntList.h</a></li>
+<li><a href="IntList.cpp">IntList.cpp</a></li>
+<li><a href="testIntList.cpp">testIntList.cpp</a></li>
+<li><a href="Makefile">Makefile</a></li>
+</ul>
+<hr>
+<h2>IntList.h</h2>
+
+<pre>#ifndef INTLIST_H
+#define INTLIST_H
+ 
+<b>class IntList {</b>
+ 
+<b>  public:</b>
+    // Constructors
+    IntList();
+    IntList(int size);
+ 
+    IntList(const IntList &amp;L);              // copy constructor
+    ~IntList();                             // destructor
+    IntList &amp; operator=(const IntList &amp;L);  // assignment
+ 
+    // Other public member functions
+    void addToEnd(int k);   // adds value k to the end of the list
+    void print() const;     // prints out the list (using cout)
+ 
+<b>  private:</b>
+    static const int SIZE = 10;  // default initial size of array
+    int *items;                  // dynamically allocated array of ints
+    int numItems;                // number of items currently in the list
+    int arraySize;               // current size of the array
+<b>};</b>
+ 
+#endif
+</pre>
+
+<hr>
+<h2>IntList.cpp</h2>
+<pre>#include &lt;iostream&gt;
+#include "IntList.h"
+ 
+using namespace std;
+ 
+// Default (no-argument) constructor
+<b>IntList::IntList()</b> : 
+items(new int[SIZE]), numItems(0), arraySize(SIZE) {
+}
+ 
+ 
+// Constructor - takes an initial size
+<b>IntList::IntList(int size)</b> : 
+items(new int[size]), numItems(0), arraySize(size) {
+}
+ 
+ 
+// Copy constructor
+<b>IntList::IntList(const IntList &amp;L)</b> : 
+items(new int[L.arraySize]), numItems(L.numItems), arraySize(L.arraySize) {
+    for (int k = 0; k < numItems; k++)
+        items[k] = L.items[k];
+}
+ 
+ 
+// Destructor
+<b>IntList::~IntList()</b> {
+    delete [] items;
+}
+ 
+ 
+// Overload the assignment operator
+<b>IntList &amp; IntList::operator=(const IntList &amp;L)</b> {
+    // check for self-assignment - if so, do nothing
+    if (this == &L)
+        return *this;
+ 
+    else {
+        delete [] items;               // free storage pointed to by items
+        items = new int[L.arraySize];  // allocate new array
+        arraySize = L.arraySize;       // set arraySize
+ 
+        // copy items from L's array to the new array
+        // (and also set numItems)
+        for (numItems = 0; numItems &lt; L.numItems; numItems++)
+            items[numItems] = L.items[numItems];
+    }
+ 
+    return *this;
+}
+ 
+ 
+// addToEnd - adds item k to the end of the list
+// If the array is full, the array is first doubled in size.
+<b>void IntList::addToEnd(int k)</b> {
+ 
+    // check if enough room, if not, double the array
+    if (numItems == arraySize) {
+        int *newItems = new int[arraySize*2];
+        for (int i = 0; i < numItems; i++)
+            newItems[i] = items[i];
+        delete [] items;
+        items = newItems;
+        arraySize *= 2;
+    }
+ 
+    // add the item
+    items[numItems] = k;
+    numItems++;
+}
+ 
+ 
+// print - prints out the list to the console (using cout)
+<b>void IntList::print() const</b> {
+    for (int i = 0; i < numItems; i++)
+        cout &lt;&lt; items[i] &lt;&lt; " ";
+    cout &lt;&lt; endl;
+}
+</pre>
+<hr>
+<h2>testIntList.cpp</h2>
+<pre>#include &lt;iostream&gt;
+#include "IntList.h"
+ 
+using namespace std;
+ 
+void copyAgain(IntList L) {
+    IntList Lnew = L;
+    Lnew.print();
+    L.print();
+}
+ 
+int main() {
+    IntList L1;
+    IntList L2(25);
+    
+    IntList *p, *q;
+    p = new IntList;
+    q = new IntList(25);
+    
+    for (int i = 0; i < 20; i++)
+        L1.addToEnd(i+1);
+    L1.print();
+    
+    L2 = L1;
+    L2.addToEnd(-1);
+    
+    IntList L3(L1);
+    
+    L1.print();
+    L2.print();
+    L3.print();
+    
+    copyAgain(L3);
+    
+//    delete p;
+//    delete q;
+ 
+    return 0;
+}
+</pre>
+<hr>
+<h2>Makefile</h2>
+<pre># Makefile for the IntList example
+# (all this goes in a file named 'Makefile')
+  
+main: testIntList.o IntList.o
+	g++ testIntList.o IntList.o
+ 
+testIntList.o: testIntList.cpp IntList.h
+	g++ -c testIntList.cpp
+ 
+IntList.o: IntList.cpp IntList.h
+	g++ -c IntList.cpp
+ 
+clean:
+	rm *.o
+</pre>
+<h3>Using the Makefile</h3>
+<pre><b>galapagos-30(1)% ls</b>
+IntList.cpp  IntList.h	Makefile  testIntList.cpp 
+  
+<b>galapagos-30(2)% make</b>
+g++ -c testIntList.cpp
+g++ -c IntList.cpp
+g++ testIntList.o IntList.o
+ 
+<b>galapagos-30(3)% ls</b>
+a.out	     IntList.h	Makefile	 testIntList.o
+IntList.cpp  IntList.o	testIntList.cpp  
+ 
+<b>galapagos-30(4)% rm IntList.o</b>
+rm: remove regular file `IntList.o'? y
+ 
+<b>galapagos-30(5)% make</b>
+g++ -c IntList.cpp
+g++ testIntList.o IntList.o
+ 
+<b>galapagos-30(6)% make clean</b>
+rm *.o
+ 
+<b>galapagos-30(7)% ls</b>
+a.out  IntList.cpp  IntList.h  Makefile  testIntList.cpp  
+ 
+<b>galapagos-30(8)% make</b>
+g++ -c testIntList.cpp
+g++ -c IntList.cpp
+g++ testIntList.o IntList.o
+ 
+<b>galapagos-30(9)% make IntList.o</b>
+make: `IntList.o' is up to date.
+</pre>
+</body></html>

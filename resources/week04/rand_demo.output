@@ -1,0 +1,14 @@
+Script started on Mon 15 Feb 2016 10:45:22 AM CST
+adelie-03[/p/course/cs368-deppeler/public/html/CPP/resources/week04]% make rand_ce[K[Kdemo
+make[2]: Entering directory `/afs/cs.wisc.edu/p/course/cs368-deppeler/public/html/CPP/resources/week04'
+/s/gcc-5.1/bin/g++ -Wall  -o rand_demo rand_demo.cpp
+[01m[Krand_demo.cpp:[m[K In function ‘[01m[Kint main()[m[K’:
+[01m[Krand_demo.cpp:23:21:[m[K [01;31m[Kerror: [m[K‘[01m[Krand[m[K’ was not declared in this scope
+        ra[i] = rand() % N;  // [0,N)
+[01;32m[K                     ^[m[K
+make[2]: *** [rand_demo] Error 1
+make[2]: Leaving directory `/afs/cs.wisc.edu/p/course/cs368-deppeler/public/html/CPP/resources/week04'
+adelie-03[/p/course/cs368-deppeler/public/html/CPP/resources/week04]% exit
+exit
+
+Script done on Mon 15 Feb 2016 10:45:42 AM CST

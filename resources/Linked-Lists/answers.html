@@ -1,0 +1,217 @@
+<html>
+<head>
+<title>Linked-list Answers</title>
+<link rel="stylesheet" type="text/css" href="../notes.css">
+</head>
+<body>
+
+<h1>Answers to Self-Study Questions</h1>
+
+<h2><a name="ans1">Test Yourself #1</a></h2>
+<p><img src="tynAns1.gif"></p>
+
+<h2><a name="ans2">Test Yourself #2</a></h2>
+<p>
+<span class="minorHeading">Question 1:</span> <span class="Java">L.getNext().setData("cat");</span></p>
+<p>
+<span class="minorHeading">Question 2:</span> <span class="Java">L.setNext( new Listnode("rat", L.getNext()) );</span></p>
+
+<h2><a name="ans3">Test Yourself #3</a></h2>
+<p>The list begins:</p>
+<p><img src="tynAns3a.gif"></p>
+<p>and after the code looks like:</p>
+<p><img src="tynAns3b.gif"></p>
+<p>and this is correct.</p>
+
+
+<h2><a name="ans4">Test Yourself #4</a></h2>
+<p>
+Here's the code for the <span class="Java">add</span> method that adds to the end
+of the list.</p>
+<dir>
+<pre>
+//**********************************************************************
+// add
+//
+// Given: E d
+//
+// Do:    Add d to the end of the list
+//
+// Implementation:
+//        o create a new Listnode for d, pointed to by the "next" field
+//          of the last node in the list (which will be the header node if
+//          the list is empty)
+//        o change the lastNode pointer to point to the new node
+//        o increment numItems.
+//
+//**********************************************************************
+public void add(E d) {
+    lastNode.setNext(new Listnode&lt;E&gt;(d));
+    lastNode = lastNode.getNext();
+    numItems++;
+}
+</pre>
+</dir>
+
+<h2><a name="ans5">Test Yourself #5</a></h2>
+<p>
+Here's the code for the <span class="Java">add</span> method that adds at a given position.</p>
+<dir>
+<pre>
+//**********************************************************************
+// add
+//
+// Given: int pos and E d
+//
+// Do:    Throw an exception if pos has a bad value.
+//        Otherwise, add d to the list at position pos (counting from zero)
+//
+// Implementation:
+//        Check for a bad position and if so, throw an exception.
+//        Otherwise:
+//          If we're being asked to add to the end of the list,
+//          call the "add to the end" method (that way we don't need
+//          to worry about updating the lastNode pointer).  Otherwise:
+//
+//          o find the node n in position pos-1 (counting the header
+//            node as being in position -1)
+//
+//          o create a new Listnode for d, whose next field points to the
+//            node after n and set n's "next" field to point to the new node
+//
+//**********************************************************************
+public void add(int pos, E d) {
+    // check for bad position
+    if (pos < 0 || pos > numItems) {
+        throw new IndexOutOfBoundsException();
+    }
+	
+    // if asked to add to end, let the other add method do the work
+    if (pos == numItems) {
+        add(d);
+        return;
+    }
+ 
+    // find the node n after which to add a new node and add the new node
+    Listnode&lt;E&gt; n = items;
+    for (int k = 0; k &lt; pos; k++) {
+        n = n.getNext();
+    }
+    n.setNext(new Listnode&lt;E&gt;(d, n.getNext()));
+    numItems++;
+}
+</pre>
+</dir>
+
+<h2><a name="ans6">Test Yourself #6</a></h2>
+<p>
+Here's the code for the constructor.
+</p>
+<dir>
+<pre>
+//**********************************************************************
+// LinkedList
+//
+// constructor for the LinkedList class
+//
+// Do:    Initialize the list to be empty (i.e., initialize the
+//        linked list to have just a header node, pointed to by
+//        both pointer fields, and initialize numitems to zero).
+//
+//**********************************************************************
+public LinkedList() {
+    items = lastNode = new Listnode&lt;E&gt;(null);
+    numItems = 0;
+}</pre></dir>
+
+
+
+<h2><a name="ans7">Test Yourself #7</a></h2>
+
+<TABLE BORDER CELLSPACING=1 CELLPADDING=7 WIDTH=590>
+<TR>
+<TH WIDTH="33%" VALIGN="TOP">operation</TH>
+<TH WIDTH="33%" VALIGN="TOP">linked list</TH>
+<TH WIDTH="33%" VALIGN="TOP">array</TH>
+</TR>
+<TR><TD WIDTH="33%" VALIGN="TOP">
+<P ALIGN="CENTER">remove first</TD>
+<TD WIDTH="33%" VALIGN="TOP">
+<P ALIGN="CENTER">O(1)</TD>
+<TD WIDTH="33%" VALIGN="TOP">
+<P ALIGN="CENTER">O(N)</TD>
+</TR>
+<TR><TD WIDTH="33%" VALIGN="TOP">
+<P ALIGN="CENTER">remove last</TD>
+<TD WIDTH="33%" VALIGN="TOP">
+<P ALIGN="CENTER">O(N)</TD>
+<TD WIDTH="33%" VALIGN="TOP">
+<P ALIGN="CENTER">O(1)</TD>
+</TR>
+</TABLE>
+
+
+<p>For linked list: To remove the first item from a list (with a
+header node) you only have to do <span class="Java">L.setNext(L.getNext().getNext())</span>, and
+this is O(1).
+To remove the last node you must traverse the
+list from the first node to get to the next-to-last node to do the
+delete, so this is O(N), where N is the size of the list.</p>
+<p>For arrays: To remove the first item you must shift all the
+remaining items one position to the left to fill in the hole so
+this is O(N).  To remove the last item there are no shifts because no
+items are to the right, so this is O(1).</p>
+
+<h2><a name="ans8">Test Yourself #8</a></h2>
+<dir><pre>
+// Note: this code has excessive comments to help you understand it in detail.
+// Returns true if val is in circular linked list l; otherwise returns false
+if (l == null)  {
+    return false;            // no items in list so not found
+     
+if (l.getData().equals(val)) 
+    return true;             // val is in the first node in the list
+     
+Listnode&lt;E&gt; tmp = l.getNext();
+while (tmp != l) {           // stops from going past first node and going in circles
+    if (tmp.getData().equals(val)) 
+        return true;         // found val at this node
+    tmp = tmp.getNext();
+}
+return false;                // did not find val in list</pre></dir>
+
+<h2><a name="ans9">Test Yourself #9</a></h2>
+<dir><pre>
+// Adds object "o" to the end of the list pointed to by "last"
+public void addLast(Listnode&lt;E&gt; last, E o) {
+    Listnode&lt;E&gt; tmp = new Listnode&lt;E&gt;(o);
+    if (last == null) {
+        tmp.setNext(tmp);
+    } else {
+        tmp.setNext(last.getLast());
+        last.setNext(tmp);
+    }
+    last = tmp;
+}
+ 
+// Adds object "o" to the start of the list pointed to by "last"
+public void addFirst(Listnode&lt;E&gt; last, E o) {
+    addLast(last, o);
+    last = last.getNext();
+}
+ 
+// Removes the first node from the list pointed to by "last"
+public void removeFirst(Listnode&lt;E&gt; last) {
+    if (last == null) {
+        throw new IndexOutOfBoundsException(
+                        "attempt to remove from empty list");
+    }
+    if (last.getNext() == last) {
+        // one-node list
+        last = null;
+    } else {
+        last.setNext(last.getNext().getNext());
+    }
+}</pre></dir>
+</body>
+</html>

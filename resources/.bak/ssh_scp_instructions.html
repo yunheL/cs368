@@ -1,0 +1,128 @@
+<html>
+
+<head>
+<meta name="GENERATOR" content="Microsoft FrontPage 12.0">
+<meta name="ProgId" content="FrontPage.Editor.Document">
+<meta http-equiv="Content-Type" content="text/html; charset=windows-1252">
+<title>Using SCP/SSH to connect to CS Computers</title>
+<link rel="stylesheet" type="text/css" href="../webpage.css">
+<style><!--
+h1, h2, h3 { margin-top:0; margin-bottom:-10 }
+table.page   { align: center; width: 100%; border: no }
+p.navigation { font-size: 70%; color: #006600 }
+p.sectionDesc { font-size: 90%; font-weight: bold; color: #000080 }
+.subtitle { font-size: 70%; font-weight: normal; color: #006600 }
+.headerBG { background-color: #cde7f0 }
+.standoutBG { background-color: #e0f8ec }
+.regBG { background-color: #ffffff }
+.bottomStyle { font-size: 70%; color: #FFFFFF}
+.reg { font-size: 90% }
+--></style>
+</head>
+
+<body>
+
+<table class="page" cellpadding="8" cellspacing="0">
+
+<tr><td class="headerBG">
+<h1>CS368: <i>Learning a New Programming Language</i><br>
+<span class="subtitle"><b>Using SCP/SSH to connect to CS Computers</b> -  
+Fall 2015</span>
+</h1>
+<br>
+ 
+
+<p class="navigation">&nbsp;&nbsp;In this page:
+    <a href="#Copying">Copying</a> |
+    <a href="#Connecting">Connecting</a> <br>
+    
+&nbsp;&nbsp;Related pages:
+<a href="../main.html">Home</a> |
+    <a href="labs.html">Computer Labs</a> |
+    <a href="http://www.cs.wisc.edu/twiki/bin/view/CSDocs/SshHowTo">Using SSH</a>
+
+</p>
+</td></tr>
+
+<tr><td></td></tr> <!-- space between items -->
+
+<tr><td class="standoutBG"><p class="reg">Note: this information was written with Mac users in mind (since <tt>ssh</tt> and <tt>scp</tt> are available from the Mac OS Terminal), however, users of other platforms may
+also find it useful.</p>
+<p class="reg">Windows users: the CSL recommends 
+<a href="http://www.chiark.greenend.org.uk/~sgtatham/putty/">PuTTY</a> as a free <tt>ssh</tt> client for Windows.
+You can also download <tt>pscp</tt> from the PuTTY website (<tt>pscp</tt> is PuTTY's version of <tt>scp</tt> and works pretty much the same as <tt>scp</tt>).
+</p>
+</td></tr>
+
+<tr><td></td></tr> <!-- space between items -->
+
+<tr><td class="regBG">
+<h2 id="Copying">Copying to/from Your Computer and a CS Lab Computer</h2>
+<p>Use secure copy:
+<dir><tt>
+   scp <em>&lt;source_of_file_to_be_copied&gt;</em> <em>&lt;destination_folder&gt;</em>
+</tt></dir>
+   Example:
+<dir><tt>
+   scp Desktop/H1.txt bbadger@best-linux.cs.wisc.edu:/u/b/b/bbadger/private/
+</tt>
+</dir>
+(Note: if your computer will not allow you to connect to <tt>best-linux.cs.wisc.edu</tt>, try connecting to <tt>best-galapagos.cs.wisc.edu</tt>; if that doesn't work, try connecting to <tt>galapagos-<i>NN</i>.cs.wisc.edu</tt> where <i>NN</i> is a 2 digit number between 01 and 30.)</p>
+<p>The first argument (<tt><em>&lt;source_of_file_to_be_copied&gt;</em></tt>)
+    is where your file is currently located on your computer.
+   The second argument (<tt><em>&lt;destination_folder&gt;</em></tt>)
+    is the destination and should be an existing folder. 
+In the example above, the file &quot;<tt>H1.txt</tt>&quot; is being copied from the desktop of a 
+personal computer to the private CS directory of a person with the CS login &quot;<tt>bbadger</tt>&quot;.&nbsp; 
+The general format for getting to your personal CS directory is 
+<tt>/u/<em>&lt;first_letter_of_CS_login&gt;</em>/<em>&lt;second_letter_of_CS_login&gt;</em>/<em>&lt;CS_login&gt;</em>/</tt></p>
+<p>Note the slash (<tt>/</tt>) at end is important so that the source file is 
+copied into the destination folder (as a file with the same name as the file on 
+your computer) and not copied as a file with a new name (into a folder you don't 
+intend it to go).
+</p>
+
+
+</td></tr>
+
+<tr><td></td></tr> <!-- space between items -->
+
+<tr><td class="regBG">
+<h2 id="Connecting">Remotely Connecting to a CS Lab Computer</h2>
+<ol>
+<li><p>
+Go to the Terminal and enter:
+<dir><tt>
+   ssh <em>&lt;username&gt;</em>@best-linux.cs.wisc.edu
+</tt></dir>
+<p>
+   where <em><tt>&lt;username&gt;</tt></em> is replaced with your CS login name.
+</p>
+<p>Note: if your computer will not allow you to connect to <tt>best-linux.cs.wisc.edu</tt>, try connecting to <tt>best-galapagos.cs.wisc.edu</tt>; if that doesn't work, try connecting to <tt>galapagos-<i>NN</i>.cs.wisc.edu</tt> where <i>NN</i> is a 2 digit number between 01 and 30.</p>
+</li>
+<li><p>You may be prompted
+   about something, just type in yes to add as a default.</p>
+</li>
+<li><p>
+You will be prompted for your CS account password.
+   (Your password will not show up as you type it.)
+   Press enter and you are logged in.
+</p></li>
+<li><p>
+To logout, just type in "logout" on the command line.
+</p></li>
+</ol>
+
+</td></tr>
+
+
+<tr>
+  <td class="bottomStyle">
+Last Updated: 9/4/2015 by Okan Akalin &nbsp;&nbsp;&nbsp; &copy;2015 Beck Hasti
+</td>
+</tr>
+
+</table>
+</body>
+
+</html>
