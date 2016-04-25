@@ -1,3 +1,50 @@
+///////////////////////////////////////////////////////////////////////////////
+////                   ALL STUDENTS COMPLETE THESE SECTIONS
+//// Title:            cs368_p4
+//// Files:            main.cpp, ComplexNumber.cpp
+//// Semester:         cs368  Spring 2016
+////
+//// Author:           Yunhe Liu
+//// Email:            liu348@wisc.edu
+//// CS Login:         yunhe
+//// Lecturer's Name:  Deb
+//// Lab Section:      (your lab section number)
+////
+////////////////////// PAIR PROGRAMMERS COMPLETE THIS SECTION ////////////////////
+////
+////                   CHECK ASSIGNMENT PAGE TO see IF PAIR-PROGRAMMING IS ALLOWED
+////                   If pair programming is allowed:
+////                   1. Read PAIR-PROGRAMMING policy (in cs302 policy) 
+////                   2. choose a partner wisely
+////                   3. REGISTER THE TEAM BEFORE YOU WORK TOGETHER 
+////                      a. one partner creates the team
+////                      b. the other partner must join the team
+////                   4. complete this section for each program file.
+////
+//// Pair Partner:     (name of your pair programming partner)
+//// Email:            (email address of your programming partner)
+//// CS Login:         (partner's login name)
+//// Lecturer's Name:  (name of your partner's lecturer)
+//// Lab Section:      (your partner's lab section number)
+////
+////////////////////// STUDENTS WHO GET HELP FROM OTHER THAN THEIR PARTNER //////
+////                   must fully acknowledge and credit those sources of help.
+////                   Instructors and TAs do not have to be credited here,
+////                   but tutors, roommates, relatives, strangers, etc do.
+////
+//// Persons:          Identify persons by name, relationship to you, and email.
+////                   Describe in detail the the ideas and help they provided.
+////
+//// Online sources:   Google, Stack Overflow, cplusplus.com 
+////////////////////////////// 80 columns wide //////////////////////////////////
+
+/*
+ * This class reads in user input complex number to test the functionality
+ * of the implemented complex number clas.
+ * @author: Yunhe Liu
+ */
+
+
 #include "stdio.h"
 #include "stdlib.h"
 #include <iostream>
@@ -5,6 +52,10 @@
 
 using namespace std;
 
+/*
+ * main method for testing functionaly of the ComplexNumber class.
+ * @return 0 upon success
+ */
 int main(int argc, char* argv[])
 {
   cout << "Enter a complex number C1: " << endl;
@@ -195,3 +246,4 @@ int main(int argc, char* argv[])
   return 0;
 */
 }
+//correct version to submit
