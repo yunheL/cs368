@@ -1,0 +1,75 @@
+Function templates
+
+A function template is not a function but a pattern for what could becmoe a function
+
+How to write a function template:
+template <generic_type_list>
+//rest of function definition using types
+//listed in the generic_type_list
+
+class name
+typename name
+
+Examples
+minimum - returns the minimum of two values
+int minimum(int x, int y){
+  return (x<y) ? x:y; //if x==y, then y is returned
+}
+
+//type T must overload operator <
+template <typename T> const T &x, const T &y
+const T & minimum<const & x, const & y>{
+  return (x<y) ? x:y;
+}
+
+swapIt - swaps the values of two variables (Hint: must pass the variables by reference)
+
+//note that you may also want to have different type for x and y
+//so they can work, for example, when you want to swap int and double
+template <typename T>
+void swapIt(T &x, T &y)
+{
+  T t;
+  t = x;
+  x = y;
+  y = t;
+｝
+
+Using templated functions
+int x = 5, y = 9;
+double c = 3.2,  d = 9.7;
+
+cout << minimum(x,y) << endl;
+cout << minimum<double>(c,d) << endl;
+
+swapIt(x,y);
+swapIt(c,d);
+//swapIt(3, 2.5)--cannot swap literal, has to be object
+//if you want to swap a double and int, you will need either to cast
+//or your swapIt method should be able to take in different types and
+//specifies how to swap when different types are taken in
+
+cout << "After swapIt, x = " << x << ", y = " << y << endl;
+cout << "After swapIt, c = " << c << ", d = " << d << endl;
+
+Compiling templated functions and classes
+what happens at compile time:
+function/class expansion
+- compiler determines type to create
+- create new type (function) by substitutions “type” for the typename in template
+- only parts of class used by that institution get compiled
+- compile error if type selected does not have needed operators, constructors, methods.
+Note: Document (i.e. write comments for) required pieces for each function and class template. 
+
+Compare to Java generics
+Compiler does type erasure
+- connect to object
+lots of down casting
+Deb thinks it is not as nice as c++
+
+Separate compilation : h and cpp file
+- put all in h
+- split according
+
+inclusion model
+- pull all in h
