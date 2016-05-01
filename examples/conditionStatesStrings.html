@@ -1,0 +1,105 @@
+<html>
+
+<head>
+<meta http-equiv="Content-Language" content="en-us">
+<meta name="GENERATOR" content="Microsoft FrontPage 12.0">
+<meta name="ProgId" content="FrontPage.Editor.Document">
+<meta http-equiv="Content-Type" content="text/html; charset=windows-1252">
+<LINK rel="stylesheet" type="text/css" href="./example.css">
+<title>Overloading ++ and --, Condition States, and Strings</title>
+</head>
+
+<body>
+<h1>Overloading <tt>++</tt> and <tt>--</tt>, Condition States, and Strings</h1>
+<hr>
+<h2>Overloading <tt>++</tt> and <tt>--</tt></h2>
+<h3>Prefix</h3>
+<h3>Postfix</h3>
+<h3>Overloading</h3>
+<p><b>In header (<tt>.h</tt>) file</b></p>
+<dir><pre>class MyClass {
+    ...
+    const MyClass &amp; operator++();  // prefix form
+    MyClass operator++(int);       // postfix form
+    ...
+};
+</pre></dir>
+<p><b>In source (<tt>.cpp</tt>) file</b></p>
+<dir><pre>const MyClass &amp; MyClass::operator++() { // prefix form
+    // code to increment data members
+    return *this;
+}
+
+MyClass MyClass::operator++(int) { // postfix form
+    MyClass temp = *this;
+    // code to increment data members
+    return temp;
+}
+</pre></dir>
+<hr>
+
+
+<h2>Condition States</h2>
+<h3>States:</h3>
+<ul>
+<li><tt>eof</tt></li>
+<li><tt>good</tt></li>
+<li><tt>bad</tt></li>
+<li><tt>fail</tt></li>
+</ul>
+
+<h3>Useful member functions (where <tt>in</tt> is a stream):</h3>
+<ul>
+<li><tt>in.eof()</tt></li>
+<li><tt>in.good()</tt></li>
+<li><tt>in.bad()</tt></li>
+<li><tt>in.fail()</tt><br><br></li>
+<li><tt>in.clear()</tt><br><br></li>
+<li><tt>in.setstate(<i>state</i>)</tt><br><br></li>
+</ul>
+<p>Note:</p>
+<ul>
+<li><tt>in.fail()</tt> is true if either <tt>ios::badbit</tt> or <tt>ios::failbit</tt> have been set</li>
+<li><tt>!</tt> has been overloaded for streams: <tt>!in</tt> is the same as <tt>in.fail()</tt></li>
+</ul>
+<hr>
+
+
+<h2>Strings</h2>
+<h3>C++ <tt>string</tt> Class</h3>
+<dir>
+<p>In <tt>string</tt> library ( <tt>#include &lt;string&gt;</tt> )</p>
+
+<p>Overloaded support for relational operators ( <tt>==   !=   &gt;   &gt;=   &lt;   &lt;=   =</tt> )</p>
+
+<p><b>C++ strings are mutable:</b></p>
+<p>&nbsp;</p><p>&nbsp;</p><p>&nbsp;</p><p>&nbsp;</p>
+
+<p><b>Useful member functions:</b></p>
+<p>&nbsp;</p><p>&nbsp;</p><p>&nbsp;</p><p>&nbsp;</p><p>&nbsp;</p><p>&nbsp;</p>
+
+<p><b>Recommendation:</b></p>
+<ul> 
+<li>use <tt>string</tt> library</li> 
+<li>convert to and from C-style as needed but do all string 
+operations using <tt>string</tt> library</li>
+</ul>
+</dir>
+<h3>C-Style Strings</h3>
+<dir>
+<p>C-style string = an array of characters ending in <tt>'\0'</tt></p>
+
+<p>&nbsp;</p><p>&nbsp;</p><p>&nbsp;</p><p>&nbsp;</p><p>&nbsp;</p><p>&nbsp;</p>
+
+<p><b>Library support in <tt>cstring</tt></b>   (need to <tt>#include &lt;cstring&gt;</tt>):</p>
+<pre>
+int    strlen( const char *str )
+
+char * strcpy( char *LHS, char *RHS )
+
+char * strcat( char *LHS, char *RHS )
+
+int    strcmp( const char *LHS, const char *RHS )
+</pre>
+</dir>
+</body></html>

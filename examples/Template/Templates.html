@@ -1,0 +1,164 @@
+<html>
+
+<head>
+<meta http-equiv="Content-Language" content="en-us">
+<meta name="GENERATOR" content="Microsoft FrontPage 12.0">
+<meta name="ProgId" content="FrontPage.Editor.Document">
+<meta http-equiv="Content-Type" content="text/html; charset=windows-1252">
+<LINK rel="stylesheet" type="text/css" href="../example.css">
+<title>Templates</title>
+</head>
+
+<body>
+<h1>Templates</h1>
+<p>Source files (for downloading):</p>
+<ul>
+<li><a href="fctnTemplates.h">fctnTemplates.h</a></li>
+<li><a href="ObjectWrapper.h">ObjectWrapper.h</a></li>
+<li><a href="testTemplate.cpp">testTemplate.cpp</a></li>
+</ul>
+
+<hr>
+<h2>Function Templates</h2>
+<p>A function template is <i>not</i> a function but a pattern for what <i>could become</i> a function.</p>
+<h3>Writing</h3>
+<pre>template &lt; generic_type_list &gt;
+ 
+// fctn def using types given in generic_type_list
+</pre>
+<p>where <tt>generic_type_list</tt> is a comma separated list of items of the form <tt>typename <i>name</i></tt>
+(or <tt>class <i>name</i></tt>)</p>
+<h3>Examples</h3>
+<pre>// Templated function: minimum
+// Requires &lt; to be defined for type T
+template &lt;typename T&gt;
+const T & minimum(const T & x, const T & y) {
+    return (x &lt; y) ? x : y;
+}
+ 
+
+ 
+// Templated function: swapIt
+// Requires operator= to be defined for type T
+template &lt;typename T&gt;
+void swapIt(T & x, T & y) {
+    T temp;
+    temp = x;
+    x = y;
+    y = temp;
+}</pre>
+
+<h3>Using</h3>
+<pre>int i1 = 5, i2 = 9;
+double d1 = 3.2, d2 = 9.7;
+string s1("hello"), s2("goodbye");
+ 
+cout &lt;&lt; minimum(i1, i2) &lt;&lt; endl;
+cout &lt;&lt; minimum&lt;double&gt;(d1, d2) &lt;&lt; endl;
+cout &lt;&lt; minimum(s1, s2) &lt;&lt; endl;
+ 
+swapIt(i1, i2);
+swapIt(d1, d2);
+swapIt(s1, s2);
+ 
+cout &lt;&lt; "After swapIt, i1 = " &lt;&lt; i1 &lt;&lt; ", i2 = " &lt;&lt; i2 &lt;&lt; endl;
+cout &lt;&lt; "After swapIt, d1 = " &lt;&lt; d1 &lt;&lt; ", d2 = " &lt;&lt; d2 &lt;&lt; endl;
+cout &lt;&lt; "After swapIt, s1 = " &lt;&lt; s1 &lt;&lt; ", s2 = " &lt;&lt; s2 &lt;&lt; endl;
+</pre>
+<hr>
+
+<h2>Class Templates</h2>
+<h3>Example</h3>
+<pre>template &lt;typename Object&gt;
+class ObjectWrapper {
+  public:
+    ObjectWrapper(const Object &amp; initValue = Object() ) :
+      value(initValue) { }
+ 
+    const Object &amp; getValue() const { return value; }
+     
+    void setValue( const Object &amp; newValue ); 
+ 
+  private:
+    Object value;
+};
+ 
+template &lt;typename Object&gt;
+void ObjectWrapper&lt;Object&gt;::setValue( const Object &amp; newValue ) {
+    value = newValue;
+}</pre>
+
+<h3>Using</h3>
+<pre>ObjectWrapper&lt;int&gt; obj1(8);
+ObjectWrapper&lt;double&gt; obj2(3.14);
+ObjectWrapper&lt;string&gt; obj3(s2);
+ 
+obj1.setValue(2);
+obj3.setValue(s1);</pre>
+<hr>
+<h2>Compiling Templated Functions and Classes</h2>
+<h3>What happens at compile time: function/class expansion</h3>
+<ul>
+<li>compiler determines actual type(s) and makes appropriate substitutions to create 
+generated functions/classes for each distinct template instantiation</li>
+<li>only the parts of the class that are used by that instantiation get compiled</li>
+<li>compile error if not all used operators (or function calls) are supported</li>
+</ul>
+<p>&nbsp;</p><p>&nbsp;</p><p>&nbsp;</p>
+
+<p><b>Compare to Java generics</b></p>
+<p>&nbsp;</p><p>&nbsp;</p><p>&nbsp;</p><p>&nbsp;</p>
+<p>&nbsp;</p><p>&nbsp;</p>
+
+<h3>Separate compilation</h3>
+<ul>
+<li>separate declaration from definition (using header file and source file)</li>
+<li>support for this with templates has been historically weak and platform specific</li>
+</ul>
+<h3>Inclusion model</h3>
+<ul>
+<li>everything (including definitions) in header file</li>
+<li>works with <tt>g++</tt></li>
+</ul>
+
+<p>&nbsp;</p><p>&nbsp;</p><p>&nbsp;</p><p>&nbsp;</p>
+<hr>
+<h2>Special Template Features</h2>
+
+<h3>Multiple template parameters</h3>
+<pre>
+template &lt;typename KeyType, typename ValueType&gt;
+class Map {
+	...
+};</pre>
+<p>&nbsp;</p>
+
+<h3>Specialized templates</h3>
+<pre>template &lt;typename T&gt;
+const T &amp; minimum(const T &amp; x, const T &amp; y) {
+	return (x &lt; y) ? x : y;
+}
+ 
+template &lt;&gt;
+const double &amp; minimum&lt;double&gt;(const double &amp; x, 
+                               const double &amp; y) {
+	// do something special for doubles
+}</pre>
+
+<p>&nbsp;</p>
+<h3>Template non-type parameters</h3>
+<pre>
+Template nontype parameters
+template &lt;typename Object, int size&gt;
+class Buffer {
+	...
+  private:
+	Object buf[size];  
+};
+ 
+// in another file:
+Buffer&lt;string, 1024&gt; buffer1;
+Buffer&lt;string, 2048&gt; buffer2;
+</pre>
+
+</body></html>

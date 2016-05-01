@@ -1,0 +1,160 @@
+<html>
+
+<head>
+<meta http-equiv="Content-Language" content="en-us">
+<meta name="GENERATOR" content="Microsoft FrontPage 12.0">
+<meta name="ProgId" content="FrontPage.Editor.Document">
+<meta http-equiv="Content-Type" content="text/html; charset=windows-1252">
+<LINK rel="stylesheet" type="text/css" href="../example.css">
+<title>I/O</title>
+</head>
+
+<body>
+<h1>I/O</h1>
+<hr>
+<h2>File I/O</h2>
+<ul>
+<li><tt>#include &lt;fstream&gt;</tt></li>
+<li>Input using <tt>ifstream</tt></li>
+<li>Output using <tt>ofstream</tt></li>
+</ul>
+<p><b>Useful functions for <tt>istream</tt>s</b> (which includes <tt>ifstream</tt>s and <tt>cin</tt>)</p>
+<ul>
+<li><p><tt>in.eof()</tt></p></li>
+<li><p><tt>in.get(ch)</tt></p></li>
+<li><p><tt>in.unget()</tt></p></li>
+<li><p><tt>in.peek()</tt></p></li>
+<li><p><tt>in.ignore(n, delim)</tt></p></li>
+<li><p><tt>in.getline(myString, n)</tt></p><p>&nbsp;</p></li>
+<li><p><tt>getline(in, myString)</tt></p><p>&nbsp;</p></li>
+</ul>
+<h3>Example (from <a href="./fileIO.cpp">fileIO.cpp</a>)</h3>
+<pre>ifstream inFile("inFile.txt");
+if (!inFile) {
+    cerr &lt;&lt; "Unable to open inFile.txt for reading" &lt;&lt; endl;
+    return 1;
+}
+
+ofstream outFile("outFile.txt");
+if (!outFile) {
+    cerr &lt;&lt; "Unable to open outFile.txt for writing" &lt;&lt; endl;
+    return 1;
+}
+
+char ch;
+while (inFile.get(ch)) {
+    switch (ch) {
+      case 'a':  case 'A': 
+      case 'e':  case 'E': 
+      case 'i':  case 'I': 
+      case 'o':  case 'O': 
+      case 'u':  case 'U':
+          outFile &lt;&lt; '*';
+          break;
+      default:
+          outFile &lt;&lt; ch;
+    }
+}
+
+inFile.close();
+outFile.close();</pre>
+<h3>Example (from <a href="./fileIO.cpp">fileIO.cpp</a>)</h3>
+<pre>int countLines(string &amp; fileName) {
+
+    ifstream myFile(fileName.c_str());
+
+    if (myFile) {      
+
+        int count = 0;
+--------------------------------------------------------------
+        //<b>VERSION 1: C style strings</b>
+        // uses a char array and member function getline()
+        <b>char line[100];</b>
+        while (!<b>myFile.getline(line, 100)</b>.eof()) {
+            count++;
+            cout &lt;&lt; "Line " &lt;&lt; count &lt;&lt; ": " &lt;&lt; line &lt;&lt; endl;
+        }
+--------------------------------------------------------------
+        //<b>VERSION 2: C++ style strings</b>
+        // uses a string object and free function getline()
+        <b>string line;</b>
+        while (!<b>getline(myFile, line)</b>.eof()) {
+            count++;
+            cout &lt;&lt; "Line " &lt;&lt; count &lt;&lt; ": " &lt;&lt; line &lt;&lt; endl;
+        }
+--------------------------------------------------------------
+        myFile.close();   
+        return count;
+
+    } else {
+        cerr &lt;&lt; "Unable to open " &lt;&lt; fileName 
+             &lt;&lt; " in countLines" &lt;&lt; endl;
+        myFile.close();
+        return -1;
+    }
+}</pre>
+<hr>
+<h2>Formatting output using manipulators</h2>
+<p>Need to <tt>#include &lt;iomanip&gt;</tt> (to use manipulators that take arguments)</p>
+<p><b>Common manipulators</b></p>
+<ul>
+<li><p><tt>left</tt>, <tt>right</tt></p></li>
+<li><p><tt>setw( int )</tt></p></li>
+<li><p><tt>setprecision( int )</tt></p></li>
+<li><p><tt>fixed</tt></p></li>
+<li><p><tt>scientific</tt></p></li>
+<li><p><tt>boolalpha</tt></p></li>
+<li><p><tt>noboolalpha</tt></p></li>
+</ul>
+<h3>Example (from <a href="./Cpp_IO.cpp">Cpp_IO.cpp</a>)</h3>
+<pre>int x = 1234;
+double y = 8763.1415;
+
+cout &lt;&lt; left &lt;&lt; setw(20) &lt;&lt; x &lt;&lt; " " 
+     &lt;&lt; right &lt;&lt; setw(11) &lt;&lt; setprecision(6) 
+     &lt;&lt; fixed &lt;&lt; y &lt;&lt; " " 
+     &lt;&lt; str &lt;&lt; endl;
+</pre>
+<p><b>Output:</b></p>
+<pre>1234                 8763.141500 cs368</pre>
+<hr>
+<h2>C-Style I/O</h2>
+<p>Standard I/O library (inherited from C):  <tt>#include &lt;cstdio&gt;</tt></p>
+
+<p><b>Console I/O</b></p>
+<ul>
+<li><p>To write to standard output, use</p><p>&nbsp;</p></li> 
+<li><p>To read from standard input, use</p><p>&nbsp;</p></li>
+</ul>
+
+<p><b>File I/O</b></p>
+<ul>
+<li><p>To write to a file, use</p><p>&nbsp;</p></li>
+<li><p>To read from a file, use</p><p>&nbsp;</p></li>
+</ul>
+
+<p>Never mix I/O libraries in a single program!</p>
+
+<h3>Example (from <a href="./C_IO.cpp">C_IO.cpp</a>)</h3>
+<pre>int x = 1234;
+double y = 8763.1415;
+char str[20] = "cs368";
+
+
+
+
+printf("x is %d, y is %f, str is %s\n", x, y, str);
+
+
+printf("%-20d %11.6f %s\n", x, y, str);
+  
+  
+    
+
+
+    
+printf("Enter a number and a string: ");
+
+scanf("%d %s", &amp;x, str);
+</pre>
+</body></html>

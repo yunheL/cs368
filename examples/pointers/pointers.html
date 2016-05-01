@@ -1,0 +1,98 @@
+<html>
+
+<head>
+<meta http-equiv="Content-Language" content="en-us">
+<meta name="GENERATOR" content="Microsoft FrontPage 12.0">
+<meta name="ProgId" content="FrontPage.Editor.Document">
+<meta http-equiv="Content-Type" content="text/html; charset=windows-1252">
+<LINK rel="stylesheet" type="text/css" href="../example.css">
+<title>Pointers</title>
+</head>
+
+<body>
+<h1>Pointers</h1>
+<hr>
+<h2>Pointers and <tt>struct</tt>s</h2>
+<h3>Recall structures</h3>
+
+<ul>
+  <li>Defining:
+    <pre>struct Address {
+    string city;
+    int zip;
+};
+
+struct Student {
+    int id;
+    Address addr;
+};</pre>
+
+</li>
+  <li>Using:
+    <pre>Student pupil;
+ 
+pupil.id = 98765;
+pupil.addr.city = "Madison";
+pupil.addr.zip = 53713;
+ 
+ 
+ 
+ 
+ 
+</pre>
+  
+  </li>
+</ul>
+
+<h3>Pointers to structs</h3>
+
+<ul>
+  <li><p>Declaring</p><p>&nbsp;</p></li>
+  <li><p>Dynamically allocating space</p><p>&nbsp;</p></li>
+  <li><p>Assigning to</p><p>&nbsp;</p><p>&nbsp;</p><p>&nbsp;</p><p>&nbsp;</p><p>&nbsp;</p><p>&nbsp;</p><p>&nbsp;</p></li>
+  <li><p>Dynamically deallocating space</p><p>&nbsp;</p></li>
+</ul>
+
+<hr>
+<h2>Pointers and arrays</h2>
+<dir><pre>
+int a[10];
+ 
+int *p = new int[10];
+ 
+for (int i = 0; i < 10; i++) {
+    p[i] = i;
+    a[i] = 2*i;
+}
+ 
+int *q = a;
+</pre></dir>
+<p>&nbsp;</p>
+<p>&nbsp;</p>
+<p>&nbsp;</p>
+<p>&nbsp;</p>
+<p>&nbsp;</p>
+<hr>
+<h2>Pointers and const</h2>
+<p>&nbsp;</p>
+<dir><pre> 
+const int *p
+ 
+ 
+int * const p
+ 
+ 
+const int * const p
+ 
+ 
+</pre></dir>
+<hr>
+<h2>Pointer caveats</h2>
+<ul>
+  <li><p>Be careful with testing for equality</p><p>&nbsp;</p></li>
+  <li><p>Don't dereference uninitialized pointers</p><p>&nbsp;</p></li>
+  <li><p>Don't dereference NULL pointers</p><p>&nbsp;</p></li>
+  <li><p>Don't dereference deleted pointers</p><p>&nbsp;</p></li>
+  <li><p>Watch out for memory leaks</p><p>&nbsp;</p></li>
+</ul>
+</body></html>

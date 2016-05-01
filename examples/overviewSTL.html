@@ -1,0 +1,264 @@
+<html>
+
+<head>
+<meta http-equiv="Content-Language" content="en-us">
+<meta name="GENERATOR" content="Microsoft FrontPage 5.0">
+<meta name="ProgId" content="FrontPage.Editor.Document">
+<meta http-equiv="Content-Type" content="text/html; charset=windows-1252">
+<LINK rel="stylesheet" type="text/css" href="example.css">
+<title>STL Overview</title>
+<style><!-- 
+table { font-size: 10pt }
+--></style>
+
+</head>
+
+<body>
+<h1>STL Overview</h1>
+<p><b>Useful STL reference:</b> <a href="http://www.sgi.com/tech/stl/">http://www.sgi.com/tech/stl/</a></p>
+<hr>
+
+<h2>Containers</h2>
+
+<p>Partial list of containers in the STL:</p>
+
+<table width="100%">
+<tr>
+<td valign="top" width="50%">
+<h3>Sequential Containers</h3>
+<ul>
+<li>vector<br><br></li>
+<li>list<br><br></li>
+<li>deque</li>
+</ul>
+<p>&nbsp;</p>
+<h3>Container Adaptors</h3>
+<ul>
+<li>priority_queue<br><br></li>
+<li>stack<br><br></li>
+<li>queue<br><br></li>
+</ul>
+<p>&nbsp;</p>
+</td>
+<td valign="top">
+<p><b>Basic sequential operations</b>:</p>
+<pre>Object &amp; back( )
+void push_back( const Object &amp; x )
+void pop_back( )
+Object &amp; front( )
+iterator insert( iterator pos, const Object &amp; x )
+iterator erase( iterator pos )
+iterator erase( iterator start, iterator end )
+
+</pre>
+
+<p><b><tt>deque</tt> and <tt>list</tt> also have:</b></p>
+<pre>void push_front( const Object &amp; x )
+void pop_front( )
+
+</pre>
+<p><b><tt>deque</tt> and <tt>vector</tt> also have:</b></p>
+<pre>Object &amp; operator[]( int index )
+Object &amp; at( int index )    
+int capacity( ) const
+
+</pre>
+<p>&nbsp;</p>
+</td>
+</tr>
+
+<tr>
+<td valign="top">
+<h3>Associative Containers</h3>
+<ul>
+<li>set<br><br></li>
+<li>multiset<br><br></li>
+<li>map<br><br></li>
+<li>multimap<br><br></li>
+</ul>
+
+</td>
+<td valign="top">
+<p><b>All containers support:</b></p>
+<ul>
+	<li><tt>int size() const</tt></li>
+    <li><tt>void clear()</tt></li>
+    <li><tt>bool empty() const</tt></li>
+    <li>some kind of add operation</li>
+</ul>
+</td>
+</table>
+<hr>
+<h2>Iterators</h2>
+<p>= special objects that represent positions of elements within various STL containers (a generalization of pointers)</p>
+
+
+<p>An iterator object is always associated with one specific type of container</p>
+
+<h3>Each container defines iterator member functions</h3>
+<dir><pre>iterator begin();
+const_iterator begin() const;
+iterator end();
+const_iterator end() const;
+</pre></dir>
+
+<h3>Using iterators</h3>
+<dir><pre>list&lt;double&gt; L;
+ 
+L.push_back(1.2);
+L.push_front(3.4);
+ 
+L.insert(L.begin(), 5.6);
+L.insert(L.end(), 7.8);
+ 
+list&lt;double&gt;::const_iterator iter;
+ 
+for (iter = L.begin(); iter != L.end(); ++iter)
+    cout &lt;&lt; *iter &lt;&lt; " ";
+cout &lt;&lt; endl;
+ 
+</pre></dir>
+
+
+<h3>Basic kinds of iterators</h3>
+<ul>
+<li><p><b>input iterator</b> : read only, single pass only</p></li>
+<li><p><b>output iterator</b> : write only, single pass only</p></li>
+<li><p><b>forward (or basic) iterator</b> : read and write access, multiple passes</p></li>
+<li><p><b>bidirectional iterator</b> : forward iterator <i>plus</i> can move in reverse</p></li>
+<li><p><b>random-access iterator</b> : bidirectional iterator <i>plus</i> can move &gt; 1 element at a time</p></li>
+</ul>
+<p>&nbsp;</p><p>&nbsp;</p><p>&nbsp;</p>
+
+
+<h3>Iterator operations</h3>
+<p><strong>Input Iterator</strong></p>
+<ul>
+	<li><tt>*iter</tt><br><br></li>
+	<li><tt>iter1 == iter2</tt><br><br></li>
+    <li><tt>iter1 != iter2</tt><br><br></li>
+</ul>
+
+<p><strong>Forward/Input/Output Iterator</strong></p>
+<ul>
+	<li><tt>++iter</tt> and <tt>iter++</tt><br><br></li>
+</ul>
+
+<p><strong>Bidirectional Iterator</strong></p>
+<ul>
+	<li><tt>--iter</tt> and <tt>iter--</tt><br><br></li>
+</ul>
+
+<p><strong>Random-acces Iterator</strong></p>
+<ul>
+	<li><tt>iter += k</tt><br><br></li>
+    <li><tt>iter + k</tt><br><br></li>
+</ul>
+<hr>
+<h2>Functors</h2>
+<h3>Defining a functor</h3>
+<dir><pre>class IsPositive {
+  public:
+    bool operator() (int n) const {
+        return n &gt; 0;
+    }
+}; 
+</pre></dir>
+
+<h3>Using a functor</h3>
+<dir><pre>IsPositive test;
+int x;
+cout &lt;&lt; "Enter an integer: ";
+cin &gt;&gt; x;
+if (test(x))
+    cout &lt;&lt; x &lt;&lt; " is positive" &lt;&lt; endl;
+else
+    cout &lt;&lt; x &lt;&lt; " is not positive" &lt;&lt; endl;     
+</pre></dir>
+<hr>
+<h2>Generic Algorithms</h2>
+<p>Need to <tt>#include &lt;algorithm&gt;</tt>
+<h3>Sorting</h3>
+<p><b>Useful functions:</b></p>
+<dir><pre>void sort( RandomAccessIterator begin, RandomAccessIterator end );
+
+
+void stable_sort( RandomAccessIterator begin, RandomAccessIterator end );
+ 
+ 
+</pre></dir>
+<ul>
+<li>iterators must be non-constant random-access iterators</li>
+<li>optional comparator argument</li>
+</ul>
+<p><b>Example:</b></p>
+<dir><pre>// assume the print function has already been defined
+
+vector&lt;int&gt; V;
+ 
+V.push_back(4);
+V.push_back(8);
+ 
+V.insert(V.begin(), 12);
+V.insert(V.end(), 6);
+ 
+print(V);                   // prints:  12 4 8 6
+ 
+sort(V.begin(), V.end());
+print(V);                   // prints:  4 6 8 12
+ 
+ 
+</pre>
+</dir>
+<h3>Searching</h3>
+
+<p><b>Useful functions:</b></p>
+<dir><pre>InputIterator find( InputIterator begin, InputIterator end, 
+                    const EqualityComparable &amp; x );
+
+
+
+InputIterator find_if( InputIterator begin, InputIterator end, 
+                       Predicate pred );
+ 
+ 
+ 
+</pre></dir>
+<p><b>Example:</b></p>
+<dir><pre>vector&lt;int&gt;::iterator found, found1, found2, found3;  
+ 
+found = find(V.begin(), V.end(), 0);
+ 
+if (found != V.end()) 
+    cout &lt;&lt; *found &lt;&lt; endl;
+ 
+found1 = find_if(V.begin(), V.end(), IsPositive());
+ 
+if (found1 == V.end())
+    cout &lt;&lt; "no positive items" &lt;&lt; endl;
+else {
+    cout &lt;&lt; *found1 &lt;&lt; endl;
+ 
+    found2 = find_if(++found1, V.end(), IsPositive());
+ 
+    if (found2 == V.end())
+        cout &lt;&lt; "no more positive items" &lt;&lt; endl;
+    else {
+        cout &lt;&lt; *found2 &lt;&lt; endl;
+ 
+        found3 = find_if(++found2, V.end(), IsPositive());
+ 
+        if (found3 == V.end())
+              cout &lt;&lt; " no more positive items" &lt;&lt; endl;
+        else
+            cout &lt;&lt; *found3 &lt;&lt; endl;
+    }
+}
+</pre>
+</dir>
+<p>Suppose <tt>V</tt> contains:</p>
+<dir>
+<pre>2   -8   0   -1   3   -5   -4   -9   1   7</pre>
+</dir>
+
+</body></html>

@@ -1,0 +1,135 @@
+<html>
+
+<head>
+<meta http-equiv="Content-Language" content="en-us">
+<meta name="GENERATOR" content="Microsoft FrontPage 12.0">
+<meta name="ProgId" content="FrontPage.Editor.Document">
+<meta http-equiv="Content-Type" content="text/html; charset=windows-1252">
+<LINK rel="stylesheet" type="text/css" href="../example.css">
+<title>Overloading I/O Operators</title>
+</head>
+
+<body>
+<h1>Overloading I/O Operators</h1>
+<p>This gives an example showing overloading I/O operators (in a very simple way).
+The complete code for this example can be found in <a href="overloadIO.cpp">overloadIO.cpp</a>
+</p>
+<hr>
+<h2>Point class</h2>
+<pre>class Point {
+
+    friend ostream &amp; operator&lt;&lt;(ostream &amp; out, const Point &amp; p);
+    friend istream &amp; operator&gt;&gt;(istream &amp; in, Point &amp; p);
+
+  public:
+
+    // constructors
+    Point(): x(0), y(0) { }
+    Point(int a, int b): x(a), y(b) { }
+
+    // accessors
+    int getX() const { return x; }
+    int getY() const { return y; }
+
+    // mutators
+    void setX(int newX) { x = newX; }
+    void setY(int newY) { y = newY; }
+
+  private:
+
+    int x, y;
+};
+</pre>
+
+
+<h2>Using console I/O</h2>
+
+<pre>int main() {
+    Point p, q;
+
+    cout &lt;&lt; "enter a point: ";
+    cin &gt;&gt; p;
+    
+    
+    cout &lt;&lt; "you entered: " &lt;&lt; p &lt;&lt; endl;
+
+    cout &lt;&lt; "enter another point: ";
+    cin &gt;&gt; q;
+    
+    
+    cout &lt;&lt; "you entered: " &lt;&lt; q &lt;&lt; endl;
+
+    return 0;
+}
+
+
+
+
+
+
+
+</pre>
+
+
+<h2>Overload &lt;&lt;</h2>
+<pre>ostream &amp; operator&lt;&lt;(ostream &amp; out, const Point &amp; p) {
+    out &lt;&lt; "(" &lt;&lt; p.x &lt;&lt; "," &lt;&lt; p.y &lt;&lt; ")";
+    return out;
+}
+</pre>
+
+<h2>Overload &gt;&gt;</h2>
+<pre>istream &amp; operator&gt;&gt;(istream &amp; in, Point &amp; p) {
+
+    char ch;
+    int x, y;
+
+
+    in.get(ch);
+    while (ch == ' ' || ch == '\n' || ch == '\t')
+        in.get(ch);
+
+
+    if (ch != '(') { 
+
+        return in;
+    }
+
+
+    in &gt;&gt; x;         // read in x value
+
+
+    in.get(ch);
+    while (ch == ' ' || ch == '\n' || ch == '\t')
+        in.get(ch);
+
+
+    if (ch != ',') {
+
+        return in;
+    }
+	
+	
+    in &gt;&gt; y;         // read in y value
+
+
+    in.get(ch);
+    while (ch == ' ' || ch == '\n' || ch == '\t') 
+        in.get(ch);
+
+
+    if (ch != ')') {
+
+        return in;
+    }
+
+
+    // only after the entire point has been read in successfully do we update p
+    p.x = x;
+    p.y = y;
+    return in;
+}
+
+</pre>
+
+</body></html>

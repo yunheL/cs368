@@ -1,0 +1,73 @@
+<html>
+
+<head>
+<meta http-equiv="Content-Language" content="en-us">
+<meta name="GENERATOR" content="Microsoft FrontPage 12.0">
+<meta name="ProgId" content="FrontPage.Editor.Document">
+<meta http-equiv="Content-Type" content="text/html; charset=windows-1252">
+<LINK rel="stylesheet" type="text/css" href="./example.css">
+<title>Operator Overloading</title>
+</head>
+
+<body>
+<h1>Operator Overloading</h1>
+<hr>
+<h4>Why overload operators?</h4>
+
+<p>&nbsp;</p>
+<h4>Operators that <u>cannot</u> be overloaded</h4>
+
+<h4>Operators that <u>shouldn't</u> be overloaded</h4>
+
+<h4>Reasonable operators to overload</h4>
+<ul>
+<li><p>basic arithmetic</p></li>
+<li><p>assignment</p></li>
+<li><p>bit</p></li>
+<li><p>relational</p></li>
+<li><p>unary</p></li>
+<li><p>shift</p></li>
+<li><p>others</p><p>&nbsp;</p><p>&nbsp;</p><p>&nbsp;</p></li>
+</ul>
+
+<p><b>Can't</b></p>
+<ul>
+<li><p>create new operators</p></li>
+<li><p>change precedence or associativity</p></li>
+<li><p>change arity</p></li>
+</ul>
+
+
+<p><b>Keep in mind</b></p>
+<ul>
+<li><p>don't overload just because you can</p></li>
+<li><p>be aware of commutative (symmetric) operations</p></li>
+<li><p>be aware of what happens if operands are of different types</p></li>
+</ul>
+<hr>
+<h2>Conventions</h2>
+<p>(binary) arithmetic operators:</p>
+<p>assignment operators:</p>
+<p>relational operators:</p>
+<p>&nbsp;</p>
+
+<hr>
+<h2>Member vs. non-member</h2>
+<h3>Member function</h3>
+<p>&nbsp;</p><p>&nbsp;</p><p>&nbsp;</p><p>&nbsp;</p>
+<p>&nbsp;</p><p>&nbsp;</p>
+<h3>Non-member function</h3>
+<p>&nbsp;</p><p>&nbsp;</p><p>&nbsp;</p><p>&nbsp;</p>
+<p>&nbsp;</p><p>&nbsp;</p>
+<h4>Consider:</h4>
+<p>&nbsp;</p><p>&nbsp;</p><p>&nbsp;</p><p>&nbsp;</p>
+<p>&nbsp;</p><p>&nbsp;</p><p>&nbsp;</p><p>&nbsp;</p>
+<h4>Must be (non-static) member functions:</h4>
+<p>&nbsp;</p>
+<h4>Use non-member if:</h4>
+<ul>
+<li><p>operator is "symmetrical"</p></li>
+<li><p>want to allow implicit type conversion of left operand</p></li>
+<li><p>instance you would want to invoke it on is not of the class where the operator would be defined</p></li>
+</ul>
+</body></html>

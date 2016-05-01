@@ -1,0 +1,57 @@
+<html>
+
+<head>
+<meta http-equiv="Content-Language" content="en-us">
+<meta name="GENERATOR" content="Microsoft FrontPage 12.0">
+<meta name="ProgId" content="FrontPage.Editor.Document">
+<meta http-equiv="Content-Type" content="text/html; charset=windows-1252">
+<LINK rel="stylesheet" type="text/css" href="./example.css">
+<title>Multi-file Compilation</title>
+</head>
+
+<body>
+<h1>Multi-file Compilation</h1>
+<hr>
+<h2>Separating interface from implementation</h2>
+<h3>In Java:</h3>
+<p>&nbsp;</p>
+<h3>In C++:</h3>
+<p>&nbsp;</p>
+<p>Header file contains:</p>
+<p>&nbsp;</p><p>&nbsp;</p><p>&nbsp;</p><p>&nbsp;</p>
+
+<p>Source file contains:</p>
+<p>&nbsp;</p><p>&nbsp;</p><p>&nbsp;</p><p>&nbsp;</p>
+<hr>
+<h2>Preprocessor</h2>
+<p><b>preprocessor command</b> = any line beginning with #</p>
+<dir>
+<p><tt>#define</tt></p>
+<p>&nbsp;</p><p>&nbsp;</p><p>&nbsp;</p><p>&nbsp;</p><p>&nbsp;</p>
+<p><tt>#include</tt></p>
+<p>&nbsp;</p><p>&nbsp;</p><p>&nbsp;</p><p>&nbsp;</p><p>&nbsp;</p>
+</dir>
+<h4>conditional compilation</h4>
+<p>What if, with all your nested <tt>#include</tt>s, 
+you end up having a definition show up more than once?</p>
+<p>&nbsp;</p><p>&nbsp;</p><p>&nbsp;</p><p>&nbsp;</p>
+<p>&nbsp;</p><p>&nbsp;</p><p>&nbsp;</p><p>&nbsp;</p>
+<hr>
+<h2>Compiling with multiple files in your project</h2>
+
+<p>To compile all at once (only useful if you have just a couple files): </p>
+<dir><tt>
+g++ ExampleObj.cpp testExampleObj.cpp -o runIt
+</tt></dir>
+<p>OR</p>
+
+<p>Can compile separately, creating object files (ending in .o): </p>
+<dir><tt>
+g++ -c ExampleObj.cpp<br>
+g++ -c testExampleObj.cpp
+</tt></dir>
+<p>and then link: </p>
+<dir><tt>
+g++ ExampleObj.o testExampleObj.o -o runIt
+</tt></dir>
+</body></html>

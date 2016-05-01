@@ -1,0 +1,18 @@
+Script started on Mon 25 Apr 2016 11:09:39 AM CDT
+galapagos-25[/p/course/cs368-deppeler/public/html/CPP/resources/week13]% make
+g++ fctnTemplates.h ObjectWrapper.h testTemplate.cpp
+a.out
+5
+3.2
+goodbye
+After swapIt, x = 9, y = 5
+After swapIt, c = 9.7, d = 3.2
+After swapIt, s = goodbye, t = hello
+2
+3.14
+goodbye
+goodbye hello
+galapagos-25[/p/course/cs368-deppeler/public/html/CPP/resources/week13]% exit
+exit
+
+Script done on Mon 25 Apr 2016 11:09:44 AM CDT

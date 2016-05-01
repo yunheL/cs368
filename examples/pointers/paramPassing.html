@@ -1,0 +1,197 @@
+<html>
+
+<head>
+<meta http-equiv="Content-Language" content="en-us">
+<meta name="GENERATOR" content="Microsoft FrontPage 12.0">
+<meta name="ProgId" content="FrontPage.Editor.Document">
+<meta http-equiv="Content-Type" content="text/html; charset=windows-1252">
+<LINK rel="stylesheet" type="text/css" href="../example.css">
+<title>C++ Abstract Memory Model / Parameter Passing</title>
+</head>
+
+<body>
+<h1>C++ Abstract Memory Model</h1>
+<hr>
+<h2>Static memory</h2>
+<ul>
+<li>stores literals, global variables, function and class <tt>static</tt> variables</li>
+<li>memory allocation remains during entire execution (i.e., it's static)</li>
+</ul>
+<dir>
+<p>See <a href="./staticVarExample.cpp"><tt>staticVarExample.cpp</tt></a> for an example of a 
+<tt>static</tt> variable.</p>
+</dir>
+
+<h2>Call stack memory</h2>
+<ul>
+<li>stores local(non-static) variables, parameters</li>
+<li>memory allocation automatically managed by function calls and returns</li>
+</ul>
+
+<h2>Heap memory</h2>
+<ul>
+<li>stores dynamically allocated values (allocated using <tt>new</tt>)</li>
+<li>programmer must manage memory allocations (de-allocate using <tt>delete</tt>)</li>
+</ul>
+
+<hr>
+<h2>Java vs. C++</h2>
+<p>&nbsp;</p><p>&nbsp;</p><p>&nbsp;</p><p>&nbsp;</p>
+<p>&nbsp;</p><p>&nbsp;</p><p>&nbsp;</p><p>&nbsp;</p>
+<p>&nbsp;</p><p>&nbsp;</p><p>&nbsp;</p><p>&nbsp;</p>
+<p>&nbsp;</p><p>&nbsp;</p><p>&nbsp;</p><p>&nbsp;</p>
+<p>&nbsp;</p><p>&nbsp;</p><p>&nbsp;</p>
+<hr>
+<h1>Parameter Passing</h1>
+<p>The full code for this program (which includes code to display values of variables as the code executes) can be found in:
+<a href="ptrParamRetVal.cpp"><tt>ptrParamRetVal.cpp</tt></a>.
+</p>
+<hr>
+<h2>Pass-by-reference vs passing a pointer</h2>
+
+<pre>// Pass-by-reference (simple swap)
+void swap1(int &x, int &y) {
+    int temp = x;
+    x = y;
+    y = temp;
+}
+ 
+ 
+ 
+// Simulated pass-by-reference (simple swap)
+void swap2(int *x, int *y) {
+    int temp = *x;
+    *x = *y;
+    *y = temp;
+}
+</pre>
+<h3>In <tt>main</tt>:</h3>
+<pre>int a = 1, b = 2, c = 3, d = 4;
+ 
+swap1(a, b);
+ 
+swap2(&amp;c, &amp;d);
+ 
+</pre>
+<hr>
+<h2>Pass-by-value</h2>
+<pre>// Pass-by-value with: primitive type, pointer, array
+void passByValue(int x, int *y, int z[]) {
+    x = 1;
+    y = new int;
+    *y = 2;
+    *z = 3;
+    z = new int[3];
+    y = new int[2];
+    *z = 4;
+    *y = 5;
+}</pre>
+<h3>In <tt>main</tt>:</h3>
+<pre>int e[4], f[4];
+for (int i = 0; i < 4; i++)  
+    e[i] = 3*i;
+     
+// f = e;  &lt;---- assignment of arrays not allowed
+ 
+for (int i = 0; i < 4; i++) 
+    f[i] = e[i];
+     
+passByValue(a, &amp;b, e);
+ 
+</pre>
+<hr>
+<h2>Pass-by-reference</h2>
+<pre>// Pass-by-reference with: primitive type, pointer
+// Note that body of function is same as body of passByValue
+void passByRef(int &amp;x, int * &amp;y, int *z) {
+    x = 1;
+    y = new int;
+    *y = 2;
+    *z = 3;
+    z = new int[3];
+    y = new int[2];
+    *z = 4;
+    *y = 5;
+}
+ 
+ 
+ 
+ 
+// Pass-by-reference with pointers: good use vs. bad use
+void passByRef2(int * &amp;x, int * &amp;y) {
+    int z[4];
+    z[0] = 3;
+    x = new int[2];
+    y = z;
+}
+ 
+ 
+ 
+ 
+ </pre>
+<h3>In <tt>main</tt>:</h3>
+<pre>// passByRef(a, &amp;b, f);  // nope
+ 
+// passByRef(a, e, f);   // nope
+ 
+ 
+ 
+int *g = new int[4];
+for (int i = 0; i < 4; i++) 
+    g[i] = f[i];
+    
+passByRef(a, g, f);
+ 
+ 
+ 
+ 
+ 
+    
+int *p = new int;
+int *q = new int;
+*p = *q = 8;
+    
+passByRef2(p, q);
+ 
+ 
+</pre>
+<hr>
+<h2>Return values</h2>
+<pre>// Return value: primitive value
+int returnVal1() {
+    int x = 4;
+    return x;
+}
+ 
+ 
+ 
+// Return value: pointer (bad use)
+int *returnVal2() {
+    int x = 5;
+    return &amp;x;  // note: generates warning, but compiles
+}
+ 
+ 
+ 
+// Return value: pointer (good use)
+int *returnVal3() {
+    int *x = new int;
+    *x = 6;
+    return x;
+}</pre>
+
+<h3>In <tt>main</tt>:</h3>
+<pre>int aa, *bb, *cc;
+ 
+aa = returnVal1();
+
+*bb = returnVal1();
+ 
+ 
+ 
+bb = returnVal2();
+
+cc = returnVal3();
+</pre>
+
+</body></html>

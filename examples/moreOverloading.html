@@ -1,0 +1,83 @@
+<html>
+
+<head>
+<meta http-equiv="Content-Language" content="en-us">
+<meta name="GENERATOR" content="Microsoft FrontPage 12.0">
+<meta name="ProgId" content="FrontPage.Editor.Document">
+<meta http-equiv="Content-Type" content="text/html; charset=windows-1252">
+<LINK rel="stylesheet" type="text/css" href="./example.css">
+<title>More Operator Overloading</title>
+</head>
+
+<body>
+<h1>More Operator Overloading</h1>
+<hr>
+<h2>Automatic type conversion and <tt>explicit</tt></h2>
+<h3>Implicit type conversion</h3>
+<p>&nbsp;</p><p>&nbsp;</p>
+<h3>Type conversion and classes</h3>
+<ul>
+<li>The existence of a 1-argument constructor implies the ability to do a type conversion.</li>
+<li>By default, the compiler will apply the conversion if needed 
+when doing assignments and parameter matching.</li>
+<li>To disallow these implicit type conversions, designate the 
+1-argument constructor with the keyword <b><tt>explicit</tt></b></li>
+</ul>
+<p><b>General guideline:</b> 1-argument constructors <em>should</em> 
+be <tt>explicit</tt> unless there is a good reason to allow implicit type conversions.</p>
+<p><b>Example:</b> Suppose we remove <tt>explicit</tt> from the 1-argument 
+constructor in the <tt>Polynomial</tt> class. Consider the following code:</p>
+<dir><pre>Polynomial p1;
+
+Polynomial p2 = 4.1;
+
+p1 = 3.2;
+
+p2 += 8.7;
+
+Polynomial p3;
+
+p3 = p2 + 4.2;
+ 
+p1 = 6.5 + p3;
+</pre></dir>
+<hr>
+<h2>Member vs Non-Member Revisited</h2>
+<h3>Overloading <tt>operatorX</tt></h3>
+<ul>
+<li><p>non-member function: <tt>lhs X rhs</tt> &rarr; <tt>operatorX(lhs, rhs)</tt></p></li>
+<li><p>member function: <tt>lhs X rhs</tt> &rarr; <tt>lhs.operatorX(rhs)</tt></p></li>
+<li><p>for member functions, the type of <tt>lhs</tt> must match <em>exactly</em> (no type conversion)</p></li>
+</ul>
+
+<p>Suppose <tt>+</tt> was a <i>member</i> function of the <tt>Polynomial</tt> class.
+Consider the following (where <tt>p</tt> is a <tt>Polynomial</tt>):</p>
+<dir>
+<p><tt>p + 3.2</tt></p><p>&nbsp;</p><p>&nbsp;</p>
+<p><tt>3.2 + p</tt></p><p>&nbsp;</p><p>&nbsp;</p>
+</dir>
+<h4>Problem with non-member functions:</h4>
+<h4>Solution 1:</h4>
+<p>&nbsp;</p><p>&nbsp;</p>
+<h4>Solution 2:</h4>
+<p>&nbsp;</p><p>&nbsp;</p>
+<hr>
+<h2><tt>friend</tt> keyword</h2>
+<p><b>A friend can</b></p>
+<p><b>A class can be friends with</b></p>
+<p><b>How friendship is declared:</b></p>
+<p>&nbsp;</p><p>&nbsp;</p>
+<p><b>Friendship is not:</b></p>
+<ul>
+<li>inherited</li>
+<li>transitive</li>
+<li>reciprocal</li>
+</ul>
+<p><b>Use with caution!</b> Use a member function when you <em>can</em>
+and a friend function when you <em>have to</em>.</p>
+<hr>
+<h2>Overloading relational operators</h2>
+<p><b>Convention:</b></p><p>&nbsp;</p>
+<p><b>Make sure to be consistent:</b></p><p>&nbsp;</p>
+
+</body></html>

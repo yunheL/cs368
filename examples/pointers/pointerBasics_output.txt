@@ -1,0 +1,15 @@
+Assigning to pointers:
+  p: 0x1837010  q: 0  s: 0x1837010  t: 0x400d25
+
+Dereferencing pointers:
+  &x: 0x7fff28796538   x: 5
+  &y: 0x7fff28796534   y: 13
+   p: 0x7fff28796538  *p: 5
+   s: 0x1837010   *s: 5
+
+Precedence concerns:
+  y: 5  z: 6  p: 0x7fff2879653c
+
+Declaring and initializing:
+   a: 0x1837030  *a: 4
+   b: 0x1837050  *b: 0

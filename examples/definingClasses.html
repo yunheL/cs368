@@ -1,0 +1,107 @@
+<html>
+
+<head>
+<meta http-equiv="Content-Language" content="en-us">
+<meta name="GENERATOR" content="Microsoft FrontPage 12.0">
+<meta name="ProgId" content="FrontPage.Editor.Document">
+<meta http-equiv="Content-Type" content="text/html; charset=windows-1252">
+<LINK rel="stylesheet" type="text/css" href="./example.css">
+<title>Defining Classes</title>
+</head>
+
+<body>
+<h1>Defining Classes</h1>
+<hr>
+<h2>Constructors and member initialization lists</h2>
+<h3>A constructor is called:</h3>
+<dir>
+<p><b>when an object is declared:</b></p>
+<p>&nbsp;</p><p>&nbsp;</p><p>&nbsp;</p>
+<p><b>when an object is dynamically allocated:</b></p>
+<p>&nbsp;</p><p>&nbsp;</p><p>&nbsp;</p><p>&nbsp;</p>
+</dir>
+<p><b>In Java:</b> data members are initialized automatically before 
+a constructor executed</p>
+
+<p><b>In C++:</b> before body of constructor is executed, each data 
+member (field) that is an object is initialized by calling 
+the field's no-arg constructor</p>
+<p>&nbsp;</p><p>&nbsp;</p><p>&nbsp;</p><p>&nbsp;</p><p>&nbsp;</p>
+<h3>Member initialization lists</h3>
+<p><b>In IntList.cpp</b></p>
+<pre>IntList::IntList() : 
+items(new int[SIZE]), numItems(0), arraySize(SIZE) 
+{
+}
+
+IntList::IntList(int size) : 
+items(new int[size]), numItems(0), arraySize(size) 
+{
+}
+</pre>
+
+<hr>
+<h2>The "Big Three"</h2>
+<p>Every class that has a pointer data member should provide the "Big Three":</p>
+<ul>
+<li>copy constructor</li>
+<li>copy assignment</li>
+<li>destructor</li>
+</ul>
+<h3>Copy Constructor</h3>
+<p><b>Called automatically when an object is:</b></p>
+<ul>
+<li><p>passed by value to a function</p>
+<p>&nbsp;</p><p>&nbsp;</p></li>
+
+<li><p>returned (by value) as a function result</p>
+<p>&nbsp;</p><p>&nbsp;</p></li>
+
+<li><p>declared with an initialization from an existing object of the same class</p>
+<p>&nbsp;</p><p>&nbsp;</p></li>
+
+</ul>
+
+<p><b>In IntList.cpp</b></p>
+<pre>IntList::IntList(const IntList &amp;L) : 
+items(new int[L.arraySize]), numItems(L.numItems), arraySize(L.arraySize) {
+    for (int k = 0; k < numItems; k++)
+        items[k] = L.items[k];
+}</pre>
+
+
+<h3>Copy Assignment (operator=)</h3>
+
+<p><b>In IntList.cpp</b></p>
+<pre>IntList &amp; IntList::operator=(const IntList &amp;L) {
+    if (this == &amp;L)
+        return *this;
+ 
+    else {
+        delete [] items;               
+        items = new int[L.arraySize];  
+        arraySize = L.arraySize;      
+ 
+        for (numItems = 0; numItems < L.numItems; numItems++)
+            items[numItems] = L.items[numItems];
+    }
+ 
+    return *this;
+}
+</pre>
+
+
+<h3>Destructor</h3>
+
+<p>Called when object is about to go away:</p>
+<ul>
+<li>object (value parameter or local variable) goes out of scope</li>
+<li>pointer to object is deleted</li>
+</ul>
+
+<p><b>In IntList.cpp</b></p>
+<pre>IntList::~IntList() {
+    delete [] items;
+}</pre>
+
+</body></html>
