@@ -6,21 +6,18 @@ DEBUG  = -g        # -g for debugging
 CFLAGS = -c -std=c++11 -pedantic $(DEBUG)
 LFLAGS = -std=c++11 $(DEBUG)
  
-main: main.o Widget.o WidgetList.o
-	$(CC) $(LFLAGS) main.o Widget.o WidgetList.o
+main: student vector
+	testVector
+	testStudent
 
-main.o: main.cpp 
-	$(CC) $(CFLAGS) main.cpp stdafx.h
+vector: testVector.cpp 
+	$(CC) $(LFLAGS) -o testVector testVector.cpp 
 
-WidgetList.o: Widget.o WidgetList.cpp WidgetList.h 
-	$(CC) $(CFLAGS) WidgetList.cpp
-
-Widget.o: Widget.h Widget.cpp
-	$(CC) $(CFLAGS) Widget.cpp
+student: testSortStudent.cpp 
+	$(CC) $(LFLAGS) -o testStudent testSortStudent.cpp 
 
 memcheck:
-	valgrind testWidget
-	valgrind testlist
+	valgrind a.out
 
 clean:
 	\rm -f a.out

@@ -1,0 +1,59 @@
+
+
+
+
+galapagos-06[/p/course/cs368-deppeler/public/html/CPP/resources/week14]% testStudent
+Compare using simple if test: s1's ID is greater than s2's ID 
+CompareID functor example: 3 is greater than 1
+v.size()=3
+ID:3 (deppeler) Deb Deppeler
+ID:1 (skrentny) Jim Skrentny
+ID:2 (hasti) Beck Hasti
+====== TEST SORTING STUDENTS EXAMPLES ======
+
+after sort(v.begin(),v.end(),[](Student &s, Student &t){return s.getID() < t.getID();}) 
+v.size()=3
+ID:1 (skrentny) Jim Skrentny
+ID:2 (hasti) Beck Hasti
+ID:3 (deppeler) Deb Deppeler
+
+after sort(v.begin(),v.end(),[](Student &s, Student &t){return (s.getLogin()).compare(t.getLogin());})
+v.size()=3
+ID:3 (deppeler) Deb Deppeler
+ID:2 (hasti) Beck Hasti
+ID:1 (skrentny) Jim Skrentny
+
+
+
+
+
+galapagos-06[/p/course/cs368-deppeler/public/html/CPP/resources/week14]% testVector
+====== TEST VECTOR EXAMPLES ======
+v.empty() = 1 , v.size() = 0 , v.capacity() = 0
+
+after v.push_back("3.14") 
+v.empty() = 0 , v.size() = 1 , v.capacity() = 1
+standard for loop:    3.14
+for loop w/iterator:  3.14
+
+after v.push_back("1.7") 
+v.empty() = 0 , v.size() = 2 , v.capacity() = 2
+standard for loop:    3.14 1.7
+for loop w/iterator:  3.14 1.7
+
+after v.push_back("-4.5") 
+v.empty() = 0 , v.size() = 3 , v.capacity() = 4
+standard for loop:    3.14 1.7 -4.5
+for loop w/iterator:  3.14 1.7 -4.5
+
+after v.push_back("-3.85" and "3.85" ) 
+v.empty() = 0 , v.size() = 5 , v.capacity() = 8
+standard for loop:    3.14 1.7 -4.5 -3.85 3.85
+for loop w/iterator:  3.14 1.7 -4.5 -3.85 3.85
+
+after sort(v.begin(),v.end()) 
+v.empty() = 0 , v.size() = 5 , v.capacity() = 8
+standard for loop:    -3.85 -4.5 1.7 3.14 3.85
+for loop w/iterator:  -3.85 -4.5 1.7 3.14 3.85
+
+Script done on Mon 02 May 2016 11:22:00 AM CDT

@@ -1,0 +1,74 @@
+Iterators - pointers
+(Special objects) - pointer arithmetic
+
+*iter
+iter++ 	//next object of that type with in collections
+
+vector<string> v;
+v.push_back("3.14");
+v.push_back("1.7");
+v.push_back("-4.5");
+v.push_back("-3.85");
+
+cout << v[0];      //3.14
+cout << v.at(0);   //3.14
+
+auto iter = v.begin(); //ptr to 1st item in_collection
+
+//iterator explicitly
+for(; iter != v.end(); iter++)
+{
+  cout << " " << *iter;
+}
+
+//in this case the iterator is done for you
+for(String s : v){
+  cout << "" "" << s;
+}
+
+basic Iterator Types
+input - read access only, can only move forward, iter++, ++iter
+
+output - write access only, can only move forward iter++, ++iter
+
+forward - can only move forward
+bidirectional -  can move forward or backward ++iter, --iter
+
+random0access - can move forward or backward
+iter +=k //ptr arithmetic
+
+Function objects (functor)
+class compareID{
+  public:
+    bool operator()(Student &s, Student &t)
+    {
+      return s.getID() < t.getID();
+    }
+}
+
+main.cpp
+  Student *s1, *s2
+  s1 = new student();
+  s2 = new student();
+  CompareID comp; //create function object
+  
+  if(comp(s1, s2)){
+    cout << "s1 less than s2";
+  }
+  
+Lambda Functions
+
+sort(v.begin(), v.end(),
+ [](Student &s, Student &t)
+ {return s.getID() < t.getID();};
+
+print(v);
+
+sort(v.begin(), v.end(),
+  [](Student &s, Student &t)
+  {return s.getlogin().compare(t.getlogin());
+  
+  } 
+  );
+  
+print(v);
